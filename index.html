@@ -3,332 +3,1407 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Luiz Gabriel — Desenvolvedor</title>
+<title>Luiz Gabriel — Desenvolvedor // PRK-071</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@500;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #05070d;
-  --bg-2: #0a0f1c;
-  --card: rgba(10, 15, 28, 0.88);
-  --border: rgba(255,255,255,0.14);
-  --text: #e6edf7;
-  --muted: #9facc1;
-  --cyan: #22d3ee;
-  --blue: #4db8ff;
-  --violet: #a78bfa;
-  --green: #34d399;
-  --grad: linear-gradient(135deg, #22d3ee, #a78bfa);
-  --grad-blue: linear-gradient(135deg, #6fe0ff, #3b82f6);
-  --ink: 0 1px 2px rgba(0,0,0,0.95), 0 2px 10px rgba(0,0,0,0.8);
+  --bg: #040712;
+  --bg-deep: #070d22;
+  --panel: rgba(10, 18, 42, 0.72);
+  --panel-solid: #0a122a;
+  --chrome-hi: #f5f9ff;
+  --chrome-mid: #b6c7e2;
+  --chrome-lo: #6c80a5;
+  --cyan: #00f0ff;
+  --cobalt: #2e7bff;
+  --ice: #9cecff;
+  --acid: #ccff00;
+  --violet: #9d7bff;
+  --text: #edf4ff;
+  --muted: #9eb2d4;
+  --border-chrome: rgba(182, 208, 255, 0.28);
+  --border-glow: rgba(0, 240, 255, 0.65);
+  --chrome-grad: linear-gradient(180deg, #ffffff 0%, #dce8fa 38%, #8ea4c9 54%, #eff6ff 76%, #b2c5e6 100%);
+  --aqua-grad: linear-gradient(180deg, #a8f8ff 0%, #00e5ff 45%, #0077ff 55%, #37b6ff 100%);
+  --bar-chrome: linear-gradient(180deg, rgba(255,255,255,0.22) 0%, rgba(164,196,245,0.10) 49%, rgba(20,38,84,0.38) 51%, rgba(70,120,210,0.18) 100%);
 }
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: 'Inter', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   overflow-x: hidden;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
-::selection { background: rgba(34,211,238,0.3); }
-::-webkit-scrollbar { width: 10px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: #1e2a44; border-radius: 8px; }
-::-webkit-scrollbar-thumb:hover { background: #2c3c61; }
 
-#bg3d { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+::selection { background: rgba(0, 240, 255, 0.35); color: #ffffff; }
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #040712; border-left: 1px solid rgba(182,208,255,0.14); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #dce8fa 0%, #5e7eb8 50%, #9cb8e8 100%);
+  border-radius: 999px;
+  border: 2px solid #040712;
+}
+
+/* ================= Y2K GLOBAL ATMOSPHERE ================= */
+#bg3d {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
 #bg3d canvas { display: block; }
 
-.container { max-width: 1080px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+/* Subtle CRT micro-scanlines + ambient cyber horizon glow */
+.y2k-scanlines {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 50% at 75% 20%, rgba(0, 240, 255, 0.08), transparent 65%),
+    radial-gradient(ellipse 70% 50% at 20% 80%, rgba(46, 123, 255, 0.10), transparent 70%),
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.018) 0px,
+      rgba(255, 255, 255, 0.018) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+}
 
-section { padding: 96px 0; position: relative; z-index: 1; }
-.section-head { margin-bottom: 48px; }
-.section-head .num { font-family: 'JetBrains Mono', monospace; color: var(--cyan); font-size: 0.9rem; }
-.section-head h2 { font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; }
-.section-head .bar { width: 56px; height: 3px; background: var(--grad); border-radius: 4px; margin-top: 12px; }
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 2;
+}
 
-.hero { min-height: 100vh; display: flex; align-items: center; position: relative; }
-.hero::before { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(ellipse 700px 560px at 16% 45%, rgba(5,7,13,0.94), rgba(5,7,13,0.62) 58%, rgba(5,7,13,0.12) 82%, transparent 94%); }
-/* O conteudo precisa de stacking proprio: sem isto o ::before acima pinta
-   sobre o texto e lava as cores. */
-.hero > div { position: relative; z-index: 1; }
-.hero .hello { font-family: 'JetBrains Mono', monospace; color: var(--blue); font-size: 0.95rem; margin-bottom: 14px; font-weight: 500; text-shadow: var(--ink); }
-.hero h1 { font-size: clamp(2.4rem, 6vw, 3.9rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; color: #ffffff; text-shadow: var(--ink); }
-.hero h1 .grad { background: var(--grad-blue); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; text-shadow: none; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.95)) drop-shadow(0 2px 12px rgba(0,0,0,0.7)); }
-.type-line { font-family: 'JetBrains Mono', monospace; font-size: 1.15rem; color: #ffffff; font-weight: 500; margin-top: 16px; min-height: 1.8em; text-shadow: var(--ink); }
-.type-line .cursor { display: inline-block; width: 10px; height: 1.15em; background: var(--blue); vertical-align: text-bottom; margin-left: 4px; animation: blink 0.9s step-end infinite; }
+/* ================= Y2K TOP FLOATING CHROME HUD NAV ================= */
+.y2k-nav-wrap {
+  position: fixed;
+  top: 16px;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  padding: 0 20px;
+  pointer-events: none;
+}
+
+.y2k-nav {
+  pointer-events: auto;
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 9px 14px 9px 18px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(28, 46, 94, 0.78) 0%, rgba(8, 15, 36, 0.86) 52%, rgba(16, 30, 68, 0.84) 100%);
+  border: 1px solid rgba(195, 220, 255, 0.36);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    inset 0 -1px 0 rgba(0, 240, 255, 0.25),
+    0 10px 32px rgba(0, 0, 0, 0.55),
+    0 0 24px rgba(0, 240, 255, 0.12);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.nav-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--chrome-hi);
+}
+
+.nav-orb {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle at 32% 28%, #ffffff 0%, #99ecff 35%, #1d64ff 78%, #071b52 100%);
+  box-shadow: 0 0 14px rgba(0, 240, 255, 0.65), inset 0 1px 2px rgba(255,255,255,0.9);
+  border: 1px solid rgba(255,255,255,0.7);
+}
+
+.nav-id {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 800;
+  font-size: 0.84rem;
+  letter-spacing: 0.12em;
+  background: var(--chrome-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-links a {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--muted);
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav-links a:hover {
+  color: #ffffff;
+  border-color: rgba(0, 240, 255, 0.55);
+  background: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, rgba(0,240,255,0.14) 55%, rgba(46,123,255,0.22) 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 0 14px rgba(0, 240, 255, 0.28);
+}
+
+.nav-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgba(4, 10, 26, 0.72);
+  border: 1px solid rgba(182, 208, 255, 0.24);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--ice);
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--acid);
+  box-shadow: 0 0 10px var(--acid);
+  animation: pulseDot 1.8s ease-in-out infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.8); }
+}
+
+/* ================= HERO SECTION ================= */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-top: 90px;
+  padding-bottom: 64px;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse 760px 600px at 22% 50%, rgba(4, 7, 18, 0.88), rgba(4, 7, 18, 0.52) 58%, transparent 88%);
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 690px;
+}
+
+/* Y2K Telemetry Chip */
+.y2k-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px 6px 10px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.16) 0%, rgba(18, 36, 78, 0.65) 52%, rgba(8, 18, 46, 0.82) 100%);
+  border: 1px solid rgba(190, 224, 255, 0.42);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 0 20px rgba(0, 240, 255, 0.16);
+  margin-bottom: 20px;
+}
+
+.y2k-kicker .star-spin {
+  width: 16px;
+  height: 16px;
+  color: var(--cyan);
+  filter: drop-shadow(0 0 6px var(--cyan));
+  animation: slowSpin 10s linear infinite;
+}
+
+@keyframes slowSpin {
+  to { transform: rotate(360deg); }
+}
+
+.y2k-kicker span {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ice);
+}
+
+.hero h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2.05rem, 4.15vw, 3.25rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.08;
+  text-transform: uppercase;
+}
+
+.chrome-text {
+  display: inline-block;
+  background: var(--chrome-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 0 rgba(20, 42, 92, 0.85)) drop-shadow(0 8px 26px rgba(0, 140, 255, 0.28));
+}
+
+.aqua-text {
+  display: inline-block;
+  background: linear-gradient(180deg, #e5fdff 0%, #4df3ff 35%, #0095ff 62%, #8be8ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 0 rgba(4, 20, 62, 0.9)) drop-shadow(0 0 24px rgba(0, 240, 255, 0.42));
+}
+
+/* Y2K Cyber-Visor Typing Bar */
+.type-visor {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 22px;
+  padding: 9px 18px;
+  border-radius: 999px;
+  background: rgba(5, 12, 32, 0.82);
+  border: 1px solid rgba(0, 240, 255, 0.42);
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.65), 0 0 22px rgba(0, 240, 255, 0.15);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.02rem;
+  color: #ffffff;
+  min-height: 44px;
+}
+
+.type-visor .prompt {
+  color: var(--acid);
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(204, 255, 0, 0.6);
+}
+
+.type-visor .cursor {
+  display: inline-block;
+  width: 9px;
+  height: 1.15em;
+  background: var(--cyan);
+  box-shadow: 0 0 10px var(--cyan);
+  vertical-align: text-bottom;
+  animation: blink 0.85s step-end infinite;
+}
+
 @keyframes blink { 50% { opacity: 0; } }
-.hero p.desc { color: #ffffff; max-width: 540px; margin-top: 22px; font-size: 1.02rem; font-weight: 500; text-shadow: var(--ink); }
-.hero p.desc strong { color: #ffffff; font-weight: 700; }
-.cta-row { display: flex; gap: 14px; margin-top: 32px; flex-wrap: wrap; }
+
+.hero p.desc {
+  color: #d6e4fb;
+  max-width: 560px;
+  margin-top: 22px;
+  font-size: 1.04rem;
+  font-weight: 400;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85);
+}
+
+.hero p.desc strong {
+  color: #ffffff;
+  font-weight: 700;
+  border-bottom: 1px solid rgba(0, 240, 255, 0.55);
+}
+
+/* ================= Y2K GLOSSY GEL & LIQUID CHROME BUTTONS ================= */
+.cta-row {
+  display: flex;
+  gap: 14px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+
 .btn {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 12px 22px; border-radius: 10px; font-weight: 600; font-size: 0.92rem;
-  text-decoration: none; transition: transform .15s, box-shadow .15s, border-color .15s;
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 13px 25px;
+  border-radius: 999px;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: transform 0.16s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s ease, border-color 0.2s ease;
 }
-.btn.primary { background: var(--grad); color: #05070d; box-shadow: 0 4px 24px rgba(34,211,238,0.25); }
-.btn.primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(34,211,238,0.4); }
-.btn.ghost { border: 1px solid var(--border); color: var(--text); background: var(--card); }
-.btn.ghost:hover { transform: translateY(-2px); border-color: var(--violet); }
 
-.mono-chip { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--muted); }
-.scroll-hint { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); color: var(--muted); font-size: 1.3rem; animation: bounce 1.6s infinite; }
-@keyframes bounce { 0%,100% { transform: translate(-50%,0); } 50% { transform: translate(-50%,8px); } }
+/* Glossy Y2K top-half specular pill highlight */
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 8%;
+  right: 8%;
+  height: 44%;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.62) 0%, rgba(255,255,255,0.06) 100%);
+  pointer-events: none;
+}
 
-.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-.about-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 26px; transition: border-color .2s, transform .2s; }
-.about-card:hover { border-color: rgba(34,211,238,0.4); transform: translateY(-3px); }
-.about-card h3 { display: flex; align-items: center; gap: 10px; font-size: 1.05rem; margin-bottom: 12px; }
-.about-card h3 svg { flex-shrink: 0; }
-.about-card p { color: var(--muted); font-size: 0.94rem; }
-.fact-list { list-style: none; margin-top: 12px; }
-.fact-list li { display: flex; gap: 10px; padding: 7px 0; color: var(--muted); font-size: 0.92rem; }
-.fact-list li .dot { color: var(--cyan); font-family: 'JetBrains Mono', monospace; }
+/* Metallic chrome glint sweep on hover */
+.btn::after {
+  content: '';
+  position: absolute;
+  top: -20%;
+  left: -130%;
+  width: 55%;
+  height: 140%;
+  background: linear-gradient(110deg, transparent 0%, rgba(255,255,255,0.55) 50%, transparent 100%);
+  transform: skewX(-22deg);
+  transition: left 0.48s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
 
-.skills { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn:hover::after { left: 145%; }
+
+.btn.primary {
+  background: var(--aqua-grad);
+  color: #031026;
+  border: 1px solid #ccfaff;
+  box-shadow:
+    inset 0 -2px 6px rgba(0, 48, 128, 0.45),
+    0 6px 26px rgba(0, 212, 255, 0.42),
+    0 0 0 1px rgba(0, 240, 255, 0.35);
+}
+
+.btn.primary:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow:
+    inset 0 -2px 6px rgba(0, 48, 128, 0.45),
+    0 10px 36px rgba(0, 240, 255, 0.65),
+    0 0 0 2px rgba(255, 255, 255, 0.5);
+}
+
+.btn.primary:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.btn.ghost {
+  background: linear-gradient(180deg, rgba(196, 218, 255, 0.22) 0%, rgba(20, 36, 78, 0.72) 48%, rgba(8, 16, 40, 0.9) 52%, rgba(30, 56, 118, 0.65) 100%);
+  color: #f2f7ff;
+  border: 1px solid rgba(195, 222, 255, 0.48);
+  box-shadow: inset 0 -2px 6px rgba(0, 0, 0, 0.5), 0 6px 22px rgba(0, 0, 0, 0.4);
+}
+
+.btn.ghost:hover {
+  transform: translateY(-3px);
+  border-color: var(--cyan);
+  color: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 240, 255, 0.25), inset 0 0 16px rgba(0, 240, 255, 0.14);
+}
+
+.btn.ghost:active { transform: translateY(1px) scale(0.98); }
+
+.scroll-hint {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(182, 208, 255, 0.26);
+  background: rgba(6, 12, 30, 0.65);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  color: var(--ice);
+  animation: bounce 1.8s infinite;
+  z-index: 2;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translate(-50%, 0); }
+  50% { transform: translate(-50%, 7px); }
+}
+
+/* ================= Y2K CHROME TICKER TAPE ================= */
+.y2k-ticker {
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  border-top: 1px solid rgba(195, 222, 255, 0.32);
+  border-bottom: 1px solid rgba(195, 222, 255, 0.32);
+  background: linear-gradient(180deg, rgba(16, 30, 66, 0.92) 0%, rgba(6, 12, 30, 0.95) 50%, rgba(14, 26, 58, 0.92) 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.28), 0 0 28px rgba(0, 240, 255, 0.1);
+  padding: 11px 0;
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  gap: 34px;
+  animation: marquee 28s linear infinite;
+}
+
+.ticker-track span {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--chrome-mid);
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  white-space: nowrap;
+}
+
+.ticker-track .spark {
+  color: var(--cyan);
+  text-shadow: 0 0 8px var(--cyan);
+}
+
+.ticker-track .acid {
+  color: var(--acid);
+  text-shadow: 0 0 8px rgba(204, 255, 0, 0.55);
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ================= SECTIONS & HEADINGS ================= */
+section {
+  padding: 96px 0;
+  position: relative;
+  z-index: 2;
+}
+
+.section-head {
+  margin-bottom: 48px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(182, 208, 255, 0.22);
+  position: relative;
+}
+
+.section-head::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 140px;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--cyan), var(--cobalt), transparent);
+  box-shadow: 0 0 14px rgba(0, 240, 255, 0.65);
+}
+
+.section-head .num {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Orbitron', sans-serif;
+  color: var(--cyan);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.section-head h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.9rem, 4vw, 2.65rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  background: var(--chrome-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.section-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(182, 208, 255, 0.24);
+  background: rgba(8, 16, 38, 0.72);
+}
+
+/* ================= Y2K CHROME HUD WINDOW CARDS (ABOUT) ================= */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.about-card {
+  position: relative;
+  background: linear-gradient(165deg, rgba(16, 28, 64, 0.78) 0%, rgba(6, 12, 30, 0.88) 100%);
+  border: 1px solid var(--border-chrome);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    0 12px 36px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.about-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(0, 240, 255, 0.62);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    0 18px 46px rgba(0, 0, 0, 0.6),
+    0 0 28px rgba(0, 240, 255, 0.16);
+}
+
+/* Classic Y2K Chrome Window Titlebar */
+.card-chrome-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 16px;
+  background: var(--bar-chrome);
+  border-bottom: 1px solid rgba(182, 208, 255, 0.22);
+}
+
+.card-chrome-bar .bar-id {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--ice);
+  text-transform: uppercase;
+}
+
+.win-dots {
+  display: inline-flex;
+  gap: 5px;
+}
+
+.win-dots i {
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 30%, #ffffff, #6f94d6);
+  border: 1px solid rgba(255,255,255,0.45);
+}
+
+.win-dots i:last-child {
+  background: radial-gradient(circle at 30% 30%, #ffffff, #00e5ff);
+  box-shadow: 0 0 8px rgba(0, 240, 255, 0.7);
+}
+
+.card-body {
+  padding: 24px 26px 26px;
+}
+
+.about-card h3 {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.98rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #ffffff;
+  margin-bottom: 14px;
+}
+
+.about-card h3 svg {
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 6px rgba(0, 240, 255, 0.55));
+}
+
+.about-card p {
+  color: #c2d4f0;
+  font-size: 0.95rem;
+}
+
+.fact-list {
+  list-style: none;
+  margin-top: 8px;
+}
+
+.fact-list li {
+  display: flex;
+  gap: 10px;
+  padding: 7px 0;
+  color: #c2d4f0;
+  font-size: 0.92rem;
+  border-bottom: 1px dashed rgba(182, 208, 255, 0.12);
+}
+
+.fact-list li:last-child { border-bottom: none; }
+
+.fact-list li .dot {
+  color: var(--cyan);
+  font-family: 'JetBrains Mono', monospace;
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.65);
+}
+
+/* Y2K Glossy Metallic Gel Pills for Skills */
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
 .skill {
-  font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 500;
-  padding: 9px 16px; border-radius: 999px; border: 1px solid rgba(34,211,238,0.25);
-  background: rgba(10, 15, 28, 0.9); color: var(--text); transition: all .2s; cursor: default;
+  position: relative;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.79rem;
+  font-weight: 600;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(182, 208, 255, 0.34);
+  background: linear-gradient(180deg, rgba(255,255,255,0.16) 0%, rgba(16, 32, 74, 0.72) 48%, rgba(7, 15, 38, 0.9) 52%, rgba(22, 44, 98, 0.65) 100%);
+  color: #eaf3ff;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.38);
+  transition: all 0.2s ease;
+  cursor: default;
 }
-.skill:hover { border-color: var(--cyan); color: var(--cyan); box-shadow: 0 0 18px rgba(34,211,238,0.15); transform: translateY(-2px); }
-.skill.hl { border-color: rgba(167,139,250,0.5); }
 
-.projects { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.skill:hover {
+  border-color: var(--cyan);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.7), 0 0 16px rgba(0, 240, 255, 0.42);
+}
+
+.skill.hl {
+  border-color: rgba(0, 240, 255, 0.62);
+  color: #d6fbff;
+  background: linear-gradient(180deg, rgba(0, 240, 255, 0.32) 0%, rgba(18, 56, 130, 0.75) 50%, rgba(8, 24, 68, 0.92) 52%, rgba(0, 145, 255, 0.42) 100%);
+}
+
+/* ================= PROJECTS — Y2K HOLOGRAPHIC CHROME MODULES ================= */
+.projects {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
 .project {
-  background: var(--card); border: 1px solid var(--border); border-radius: 16px;
-  padding: 26px; display: flex; flex-direction: column; gap: 14px;
-  transition: transform .2s, border-color .2s, box-shadow .2s; position: relative; overflow: hidden;
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px;
+  background: linear-gradient(165deg, rgba(16, 30, 68, 0.8) 0%, rgba(6, 12, 30, 0.92) 100%);
+  border: 1px solid rgba(190, 220, 255, 0.34);
+  display: flex;
+  flex-direction: column;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.42),
+    0 14px 40px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(12px);
+  transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.24s ease, box-shadow 0.24s ease;
 }
-.project::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--grad); opacity: 0; transition: opacity .2s; }
-.project:hover { transform: translateY(-6px); border-color: rgba(34,211,238,0.35); box-shadow: 0 14px 44px rgba(0,0,0,0.45); }
-.project:hover::before { opacity: 1; }
-.project-top { display: flex; align-items: center; justify-content: space-between; }
-.project-icon { font-size: 1.7rem; }
-.project-links { display: flex; gap: 10px; }
-.project-links a { color: var(--muted); transition: color .2s; display: flex; }
-.project-links a:hover { color: var(--cyan); }
-.project h3 { font-size: 1.25rem; font-weight: 700; }
-.project h3 span.sub { display: block; font-size: 0.78rem; font-weight: 500; color: var(--muted); font-family: 'JetBrains Mono', monospace; margin-top: 3px; }
-.project p { color: var(--muted); font-size: 0.9rem; flex-grow: 1; }
-.tags { display: flex; flex-wrap: wrap; gap: 7px; }
-.tag { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--cyan); background: rgba(34,211,238,0.08); border: 1px solid rgba(34,211,238,0.18); padding: 4px 9px; border-radius: 6px; }
-.tag.v { color: var(--violet); background: rgba(167,139,250,0.08); border-color: rgba(167,139,250,0.2); }
-.tag.g { color: var(--green); background: rgba(52,211,153,0.08); border-color: rgba(52,211,153,0.2); }
 
-.contact-center { text-align: center; }
-.contact-center h2 { font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; }
-.contact-center p { color: var(--muted); margin-top: 10px; }
-.contact-links { display: flex; justify-content: center; gap: 16px; margin-top: 34px; flex-wrap: wrap; }
-.contact-links a {
-  display: inline-flex; align-items: center; gap: 10px; padding: 13px 24px;
-  border: 1px solid var(--border); border-radius: 12px; background: var(--card);
-  color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all .2s;
+/* Holographic cursor sheen overlay */
+.project::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 50%), rgba(0, 240, 255, 0.16), rgba(157, 123, 255, 0.08) 40%, transparent 72%);
 }
-.contact-links a:hover { transform: translateY(-3px); border-color: var(--cyan); box-shadow: 0 10px 30px rgba(34,211,238,0.15); }
-footer { border-top: 1px solid var(--border); padding: 26px 0; position: relative; z-index: 1; }
-.footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
-.footer-inner .mono-chip a { color: var(--cyan); text-decoration: none; }
 
-.reveal { opacity: 0; transform: translateY(26px); transition: opacity .6s ease, transform .6s ease; }
-.reveal.visible { opacity: 1; transform: none; }
+.project:hover::after { opacity: 1; }
 
-@media (max-width: 900px) {
+.project:hover {
+  transform: translateY(-8px);
+  border-color: var(--cyan);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    0 20px 52px rgba(0, 0, 0, 0.65),
+    0 0 32px rgba(0, 240, 255, 0.22);
+}
+
+.project-body {
+  padding: 22px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex-grow: 1;
+}
+
+.project-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.project-emblem {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(145deg, rgba(255,255,255,0.24) 0%, rgba(28, 56, 124, 0.65) 48%, rgba(8, 16, 44, 0.9) 100%);
+  border: 1px solid rgba(195, 224, 255, 0.48);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 4px 16px rgba(0, 240, 255, 0.18);
+  color: var(--cyan);
+}
+
+.project-links {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.project-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  color: var(--chrome-hi);
+  border: 1px solid rgba(182, 208, 255, 0.34);
+  background: linear-gradient(180deg, rgba(255,255,255,0.16) 0%, rgba(12, 24, 58, 0.8) 100%);
+  transition: all 0.2s ease;
+}
+
+.project-links a.demo-btn {
+  color: #031026;
+  border-color: #ccfaff;
+  background: var(--aqua-grad);
+  box-shadow: 0 0 14px rgba(0, 240, 255, 0.35);
+}
+
+.project-links a:hover {
+  border-color: var(--cyan);
+  color: #041026;
+  background: var(--aqua-grad);
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.55);
+  transform: translateY(-1px);
+}
+
+/* Y2K Projects Toolbar (Filter pills + Sync button) */
+.projects-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 26px;
+}
+
+.filter-pills {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 5px;
+  border-radius: 999px;
+  background: rgba(6, 12, 30, 0.78);
+  border: 1px solid rgba(182, 208, 255, 0.24);
+}
+
+.filter-pill {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-pill:hover {
+  color: #ffffff;
+  border-color: rgba(0, 240, 255, 0.38);
+}
+
+.filter-pill.active {
+  color: #031026;
+  background: var(--aqua-grad);
+  border-color: #ccfaff;
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.35);
+}
+
+.sync-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--ice);
+  border: 1px solid rgba(0, 240, 255, 0.36);
+  background: linear-gradient(180deg, rgba(255,255,255,0.14) 0%, rgba(10, 22, 52, 0.85) 100%);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sync-btn:hover {
+  border-color: var(--cyan);
+  color: #ffffff;
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.32);
+}
+
+.sync-btn.loading svg {
+  animation: slowSpin 0.9s linear infinite;
+}
+
+.repo-meta-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--muted);
+  margin-top: -4px;
+}
+
+.repo-meta-strip .star-pill {
+  color: var(--acid);
+  font-weight: 700;
+}
+
+.projects-more-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 28px;
+}
+
+.project h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.42rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  background: var(--chrome-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.project h3 span.sub {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-family: 'Orbitron', sans-serif;
+  margin-top: 4px;
+  background: none;
+  -webkit-text-fill-color: var(--cyan);
+}
+
+.project p {
+  color: #bfd2ef;
+  font-size: 0.9rem;
+  flex-grow: 1;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(182, 208, 255, 0.15);
+}
+
+.tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.69rem;
+  font-weight: 600;
+  color: var(--ice);
+  background: rgba(0, 240, 255, 0.1);
+  border: 1px solid rgba(0, 240, 255, 0.32);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.tag.v {
+  color: #dfd4ff;
+  background: rgba(157, 123, 255, 0.14);
+  border-color: rgba(157, 123, 255, 0.36);
+}
+
+.tag.g {
+  color: #e4ff7a;
+  background: rgba(204, 255, 0, 0.1);
+  border-color: rgba(204, 255, 0, 0.34);
+}
+
+/* ================= CONTACT — Y2K ORBITAL TRANSMISSION CARD ================= */
+.contact-box {
+  position: relative;
+  overflow: hidden;
+  border-radius: 28px;
+  padding: 60px 32px;
+  text-align: center;
+  background: linear-gradient(160deg, rgba(20, 38, 86, 0.78) 0%, rgba(6, 12, 32, 0.92) 55%, rgba(14, 28, 66, 0.82) 100%);
+  border: 1px solid rgba(195, 224, 255, 0.42);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 20px 60px rgba(0, 0, 0, 0.55),
+    0 0 40px rgba(0, 240, 255, 0.12);
+  backdrop-filter: blur(14px);
+}
+
+.contact-orbit-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 520px;
+  height: 520px;
+  opacity: 0.14;
+  pointer-events: none;
+  animation: slowSpin 38s linear infinite;
+}
+
+.contact-box .inner {
+  position: relative;
+  z-index: 2;
+}
+
+.contact-box .num {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--cyan);
+  margin-bottom: 10px;
+}
+
+.contact-box h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  background: var(--chrome-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.contact-box p {
+  color: #c2d4f0;
+  max-width: 500px;
+  margin: 14px auto 0;
+  font-size: 0.98rem;
+}
+
+.contact-links {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 34px;
+  flex-wrap: wrap;
+}
+
+/* ================= Y2K SPEC FOOTER ================= */
+footer {
+  border-top: 1px solid rgba(195, 224, 255, 0.26);
+  background: linear-gradient(180deg, rgba(8, 16, 40, 0.85) 0%, #030610 100%);
+  padding: 28px 0;
+  position: relative;
+  z-index: 2;
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.mono-chip {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.76rem;
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mono-chip a {
+  color: var(--cyan);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.mono-chip a:hover { text-decoration: underline; }
+
+.barcode {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  height: 18px;
+  opacity: 0.65;
+}
+
+.barcode span {
+  display: block;
+  height: 100%;
+  background: var(--chrome-mid);
+}
+
+/* ================= REVEAL ANIMATION ================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+@media print {
+  .reveal { opacity: 1 !important; transform: none !important; }
+}
+
+@media (max-width: 960px) {
   .about-grid { grid-template-columns: 1fr; }
   .projects { grid-template-columns: 1fr; }
+  .nav-status { display: none; }
+}
+
+@media (max-width: 620px) {
+  .nav-links a { padding: 6px 9px; font-size: 0.62rem; }
+  .hero { padding-top: 104px; }
+  .contact-box { padding: 44px 20px; }
 }
 </style>
 </head>
 <body>
 
 <div id="bg3d"></div>
+<div class="y2k-scanlines"></div>
 
+<!-- Y2K Floating Metallic Chrome HUD Navbar -->
+<div class="y2k-nav-wrap">
+  <nav class="y2k-nav" aria-label="Navegação principal">
+    <a class="nav-brand" href="#">
+      <span class="nav-orb" aria-hidden="true">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="#ffffff"><path d="M12 1l2.8 8.2L23 12l-8.2 2.8L12 23l-2.8-8.2L1 12l8.2-2.8z"/></svg>
+      </span>
+      <span class="nav-id">PRK-071</span>
+    </a>
+    <div class="nav-links">
+      <a href="#sobre">01. Sobre</a>
+      <a href="#projetos">02. Projetos</a>
+      <a href="#contato">03. Contato</a>
+    </div>
+    <div class="nav-status">
+      <span class="status-dot"></span>
+      <span id="y2k-clock">SYS.2000 // ONLINE</span>
+    </div>
+  </nav>
+</div>
+
+<!-- HERO -->
 <header class="hero container">
-  <div>
-    <div class="hello">$ olá, eu sou</div>
-    <h1>Luiz Gabriel<br><span class="grad">de Andrade Souza</span></h1>
-    <div class="type-line">&gt; <span id="typed"></span><span class="cursor"></span></div>
-    <p class="desc">Desenvolvedor focado em <strong>IA, web e automação</strong>: assistentes de IA locais, aplicações fullstack e ferramentas completas — do backend à interface.</p>
+  <div class="hero-inner">
+    <div class="y2k-kicker">
+      <svg class="star-spin" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M12 0L14.7 9.3L24 12L14.7 14.7L12 24L9.3 14.7L0 12L9.3 9.3L12 0Z"/>
+      </svg>
+      <span>SYS.ID // PRK-071 · PORTFOLIO VER.2026</span>
+    </div>
+
+    <h1>
+      <span class="chrome-text">Luiz Gabriel</span><br>
+      <span class="aqua-text">de Andrade Souza</span>
+    </h1>
+
+    <div class="type-visor">
+      <span class="prompt">&gt;_</span>
+      <span id="typed"></span><span class="cursor"></span>
+    </div>
+
+    <p class="desc">
+      Desenvolvedor focado em <strong>IA, web e automação</strong>: assistentes de IA locais, aplicações fullstack e ferramentas completas — do backend à interface.
+    </p>
+
     <div class="cta-row">
-        <a class="btn primary" href="#projetos">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M5 9l7-7 7 7M5 22h14"/></svg>
-          Ver projetos
-        </a>
-        <a class="btn ghost" href="https://github.com/PrK071" target="_blank" rel="noopener">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.66.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>
-          GitHub
-        </a>
-        <a class="btn ghost" href="https://www.linkedin.com/in/luiz-gabriel-de-andrade-souza-0a1388302/" target="_blank" rel="noopener">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.24 8.25h4.52V23H.24V8.25zM8.34 8.25h4.33v2.01h.06c.6-1.14 2.07-2.34 4.27-2.34 4.57 0 5.41 3 5.41 6.91V23h-4.52v-7.09c0-1.69-.03-3.86-2.35-3.86-2.36 0-2.72 1.84-2.72 3.74V23H8.34V8.25z"/></svg>
-          LinkedIn
-        </a>
-      </div>
+      <a class="btn primary" href="#projetos">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M5 9l7-7 7 7M5 22h14"/></svg>
+        Ver projetos
+      </a>
+      <a class="btn ghost" href="https://github.com/PrK071" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.66.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>
+        GitHub
+      </a>
+      <a class="btn ghost" href="https://www.linkedin.com/in/luiz-gabriel-de-andrade-souza-0a1388302/" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.24 8.25h4.52V23H.24V8.25zM8.34 8.25h4.33v2.01h.06c.6-1.14 2.07-2.34 4.27-2.34 4.57 0 5.41 3 5.41 6.91V23h-4.52v-7.09c0-1.69-.03-3.86-2.35-3.86-2.36 0-2.72 1.84-2.72 3.74V23H8.34V8.25z"/></svg>
+        LinkedIn
+      </a>
+    </div>
   </div>
-  <div class="scroll-hint">↓</div>
+
+  <div class="scroll-hint">
+    <span>SCROLL</span>
+    <span>▼</span>
+  </div>
 </header>
 
+<!-- Y2K CHROME MARQUEE STRIP -->
+<div class="y2k-ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span><em class="spark">✦</em> PYTHON</span>
+    <span><em class="acid">◆</em> LOCAL AI &amp; LLMS</span>
+    <span><em class="spark">✦</em> FASTAPI</span>
+    <span><em class="acid">◆</em> REACT // VITE</span>
+    <span><em class="spark">✦</em> WEBASSEMBLY</span>
+    <span><em class="acid">◆</em> PLAYWRIGHT &amp; CDP</span>
+    <span><em class="spark">✦</em> WHISPER STT &amp; PIPER TTS</span>
+    <span><em class="acid">◆</em> OPEN SOURCE // PRK-071</span>
+    <span><em class="spark">✦</em> PYTHON</span>
+    <span><em class="acid">◆</em> LOCAL AI &amp; LLMS</span>
+    <span><em class="spark">✦</em> FASTAPI</span>
+    <span><em class="acid">◆</em> REACT // VITE</span>
+    <span><em class="spark">✦</em> WEBASSEMBLY</span>
+    <span><em class="acid">◆</em> PLAYWRIGHT &amp; CDP</span>
+    <span><em class="spark">✦</em> WHISPER STT &amp; PIPER TTS</span>
+    <span><em class="acid">◆</em> OPEN SOURCE // PRK-071</span>
+  </div>
+</div>
+
+<!-- 01. SOBRE -->
 <section id="sobre">
   <div class="container">
     <div class="section-head reveal">
-      <div class="num">01.</div>
-      <h2>Sobre mim</h2>
-      <div class="bar"></div>
+      <div>
+        <div class="num">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.7 9.3L24 12L14.7 14.7L12 24L9.3 14.7L0 12L9.3 9.3L12 0Z"/></svg>
+          CH.01 // PROFILE.SYS
+        </div>
+        <h2>Sobre mim</h2>
+      </div>
+      <div class="section-meta">
+        <span>DEV // FULLSTACK &amp; AI</span>
+        <span style="color:var(--cyan);">●</span>
+        <span>REV.2026</span>
+      </div>
     </div>
+
     <div class="about-grid">
       <div class="about-card reveal">
-        <h3>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.4 1 2.3h6c0-.9.4-1.8 1-2.3A7 7 0 0 0 12 2z"/><path d="M9 21h6"/></svg>
-          Quem sou eu
-        </h3>
-        <p>Desenvolvedor focado em criar software completo e funcional. Do backend à interface, trabalho com IA, web e automação — sempre com código aberto, documentado e testável.</p>
-      </div>
-      <div class="about-card reveal">
-        <h3>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-9.6 9.6"/><circle cx="11" cy="13" r="5.5"/></svg>
-          Stack & habilidades
-        </h3>
-        <div class="skills">
-          <span class="skill hl">Python</span>
-          <span class="skill hl">FastAPI</span>
-          <span class="skill hl">React / Vite</span>
-          <span class="skill">JavaScript</span>
-          <span class="skill">WebAssembly</span>
-          <span class="skill">Playwright</span>
-          <span class="skill">Chromium CDP</span>
-          <span class="skill">LLMs / IA local</span>
-          <span class="skill">STT · Whisper</span>
-          <span class="skill">TTS · Piper</span>
-          <span class="skill">OAuth2</span>
-          <span class="skill">Scraping</span>
-          <span class="skill">Git</span>
+        <div class="card-chrome-bar">
+          <span class="bar-id">BIO_01.DAT</span>
+          <span class="win-dots"><i></i><i></i><i></i></span>
+        </div>
+        <div class="card-body">
+          <h3>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00f0ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="9" ry="3.8"/><line x1="12" y1="3" x2="12" y2="21"/></svg>
+            Quem sou eu
+          </h3>
+          <p>Desenvolvedor focado em criar software completo e funcional. Do backend à interface, trabalho com IA, web e automação — sempre com código aberto, documentado e testável.</p>
         </div>
       </div>
+
       <div class="about-card reveal">
-        <h3>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.6-9.3-9A5.5 5.5 0 0 1 12 6.6 5.5 5.5 0 0 1 21.3 12C19 16.4 12 21 12 21z"/></svg>
-          Foco técnico
-        </h3>
-        <ul class="fact-list">
-          <li><span class="dot">▸</span> Aplicações completas: frontend, backend e IA integrados</li>
-          <li><span class="dot">▸</span> Execução local de LLMs e modelos de voz (Qwen3.5, Whisper, Piper)</li>
-          <li><span class="dot">▸</span> Integrações com APIs externas e OAuth2</li>
-          <li><span class="dot">▸</span> Open source: projetos públicos e documentados no GitHub</li>
-        </ul>
+        <div class="card-chrome-bar">
+          <span class="bar-id">STACK_02.CFG</span>
+          <span class="win-dots"><i></i><i></i><i></i></span>
+        </div>
+        <div class="card-body">
+          <h3>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9d7bff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.1 8.6 22 9.3 17 14.1 18.2 21 12 17.7 5.8 21 7 14.1 2 9.3 8.9 8.6 12 2"/></svg>
+            Stack &amp; habilidades
+          </h3>
+          <div class="skills">
+            <span class="skill hl">Python</span>
+            <span class="skill hl">FastAPI</span>
+            <span class="skill hl">React / Vite</span>
+            <span class="skill">JavaScript</span>
+            <span class="skill">WebAssembly</span>
+            <span class="skill">Playwright</span>
+            <span class="skill">Chromium CDP</span>
+            <span class="skill">LLMs / IA local</span>
+            <span class="skill">STT · Whisper</span>
+            <span class="skill">TTS · Piper</span>
+            <span class="skill">OAuth2</span>
+            <span class="skill">Scraping</span>
+            <span class="skill">Git</span>
+          </div>
+        </div>
       </div>
+
       <div class="about-card reveal">
-        <h3>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-          Status
-        </h3>
-        <p>Sempre com um projeto pessoal em andamento no GitHub. Aberto a oportunidades de estágio e colaborações em projetos de IA e web.</p>
+        <div class="card-chrome-bar">
+          <span class="bar-id">SPECS_03.LOG</span>
+          <span class="win-dots"><i></i><i></i><i></i></span>
+        </div>
+        <div class="card-body">
+          <h3>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ccff00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+            Foco técnico
+          </h3>
+          <ul class="fact-list">
+            <li><span class="dot">▸</span> Aplicações completas: frontend, backend e IA integrados</li>
+            <li><span class="dot">▸</span> Execução local de LLMs e modelos de voz (Qwen3.5, Whisper, Piper)</li>
+            <li><span class="dot">▸</span> Integrações com APIs externas e OAuth2</li>
+            <li><span class="dot">▸</span> Open source: projetos públicos e documentados no GitHub</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="about-card reveal">
+        <div class="card-chrome-bar">
+          <span class="bar-id">STATUS_04.NET</span>
+          <span class="win-dots"><i></i><i></i><i></i></span>
+        </div>
+        <div class="card-body">
+          <h3>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00f0ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+            Status
+          </h3>
+          <p>Sempre com um projeto pessoal em andamento no GitHub. Aberto a oportunidades de estágio e colaborações em projetos de IA e web.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- 02. PROJETOS (AUTO-SYNC GITHUB API + REPOS.JSON FALLBACK) -->
 <section id="projetos">
   <div class="container">
     <div class="section-head reveal">
-      <div class="num">02.</div>
-      <h2>Projetos</h2>
-      <div class="bar"></div>
+      <div>
+        <div class="num">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.7 9.3L24 12L14.7 14.7L12 24L9.3 14.7L0 12L9.3 9.3L12 0Z"/></svg>
+          CH.02 // ARCHIVE.EXE
+        </div>
+        <h2>Projetos</h2>
+      </div>
+      <div class="section-meta" id="sync-status-meta">
+        <span id="repo-count-label">SYNCING GITHUB...</span>
+        <span style="color:var(--acid);">●</span>
+        <span id="sync-source-label">AUTO-SYNC</span>
+      </div>
     </div>
-    <div class="projects">
 
-      <article class="project reveal">
-        <div class="project-top">
-          <div class="project-icon">🤖</div>
-          <div class="project-links">
-            <a href="https://github.com/PrK071/JARVIS" target="_blank" rel="noopener" aria-label="JARVIS no GitHub">
-              <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.66.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>
-            </a>
-          </div>
-        </div>
-        <h3>JARVIS <span class="sub">assistente de IA local</span></h3>
-        <p>Assistente Windows que roda Qwen3.5-4B na GPU local: voz em pt-BR (STT faster-whisper + TTS Piper/Microsoft Daniel), pesquisa web com fontes citadas, Codex integrado e interface HUD web + desktop. Projeto feito em dupla.</p>
-        <div class="tags">
-          <span class="tag">Python</span>
-          <span class="tag">Qwen3.5</span>
-          <span class="tag v">Whisper STT</span>
-          <span class="tag v">Piper TTS</span>
-          <span class="tag g">Interface Web</span>
-        </div>
-      </article>
+    <div class="projects-toolbar reveal">
+      <div class="filter-pills" role="tablist" aria-label="Filtrar projetos">
+        <button class="filter-pill active" data-filter="all" type="button">Todos</button>
+        <button class="filter-pill" data-filter="featured" type="button">Destaques</button>
+        <button class="filter-pill" data-filter="demo" type="button">Com Demo ao Vivo</button>
+      </div>
+      <button class="sync-btn" id="force-sync-btn" type="button" title="Buscar repositórios mais recentes direto da API do GitHub">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><polyline points="21 3 21 9 15 9"/></svg>
+        <span id="sync-btn-text">GITHUB LIVE SYNC</span>
+      </button>
+    </div>
 
-      <article class="project reveal">
-        <div class="project-top">
-          <div class="project-icon">📚</div>
-          <div class="project-links">
-            <a href="https://github.com/PrK071/Kari" target="_blank" rel="noopener" aria-label="Kari no GitHub">
-              <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.66.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>
-            </a>
-          </div>
-        </div>
-        <h3>Kari <span class="sub">leitor de mangás fullstack</span></h3>
-        <p>Catálogo e leitor de mangás/manhwas/HQs/web novels com FastAPI + React. Agrega 8+ fontes, plugins de importação (CBZ, EPUB, PDF), OAuth2 (Google, Discord, AniList, MAL) e scraping avançado com Playwright/CDP para sites protegidos.</p>
-        <div class="tags">
-          <span class="tag">FastAPI</span>
-          <span class="tag">React</span>
-          <span class="tag v">Playwright</span>
-          <span class="tag v">OAuth2</span>
-          <span class="tag g">Scraping</span>
-        </div>
-      </article>
-
-      <article class="project reveal">
-        <div class="project-top">
-          <div class="project-icon">🎵</div>
-          <div class="project-links">
-            <a href="https://github.com/PrK071/Ichthus" target="_blank" rel="noopener" aria-label="Ichthus no GitHub">
-              <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.66.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>
-            </a>
-          </div>
-        </div>
-        <h3>Ichthus <span class="sub">reconhecedor de músicas</span></h3>
-        <p>Shazam open source gratuito: app desktop em Python (ShazamIO) e extensão de navegador que identifica músicas 100% no browser usando WebAssembly — sem precisar do app rodando.</p>
-        <div class="tags">
-          <span class="tag">Python</span>
-          <span class="tag">ShazamIO</span>
-          <span class="tag v">WebAssembly</span>
-          <span class="tag v">Extensão Chrome</span>
-          <span class="tag g">GUI Desktop</span>
-        </div>
-      </article>
-
+    <div class="projects" id="projects-grid"></div>
+    <div class="projects-more-wrap" id="projects-more-wrap" style="display:none;">
+      <button class="btn ghost" id="toggle-more-btn" type="button">Ver todos os repositórios</button>
     </div>
   </div>
 </section>
 
+<!-- 03. CONTATO -->
 <section id="contato">
-  <div class="container contact-center">
-    <div class="section-head reveal" style="margin-bottom:0;">
-      <div class="num">03.</div>
-      <h2>Bora trocar uma ideia?</h2>
-      <div class="bar" style="margin:12px auto 0;"></div>
-    </div>
-    <p class="reveal">Aberto a estágio, projetos novos e colaborações. Me chama em qualquer uma dessas:</p>
-    <div class="contact-links reveal">
-      <a href="https://github.com/PrK071" target="_blank" rel="noopener">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.66.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>
-        github.com/PrK071
-      </a>
-      <a href="https://www.linkedin.com/in/luiz-gabriel-de-andrade-souza-0a1388302/" target="_blank" rel="noopener">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.24 8.25h4.52V23H.24V8.25zM8.34 8.25h4.33v2.01h.06c.6-1.14 2.07-2.34 4.27-2.34 4.57 0 5.41 3 5.41 6.91V23h-4.52v-7.09c0-1.69-.03-3.86-2.35-3.86-2.36 0-2.72 1.84-2.72 3.74V23H8.34V8.25z"/></svg>
-        linkedin.com/in/luiz-gabriel
-      </a>
+  <div class="container">
+    <div class="contact-box reveal">
+      <!-- Y2K Wireframe Orbital Emblem Backdrop -->
+      <svg class="contact-orbit-bg" viewBox="0 0 400 400" fill="none" stroke="#8cecff" stroke-width="1.2" aria-hidden="true">
+        <circle cx="200" cy="200" r="145"/>
+        <ellipse cx="200" cy="200" rx="185" ry="62" transform="rotate(-24 200 200)"/>
+        <ellipse cx="200" cy="200" rx="185" ry="62" transform="rotate(24 200 200)"/>
+        <ellipse cx="200" cy="200" rx="68" ry="145"/>
+        <line x1="20" y1="200" x2="380" y2="200"/>
+        <line x1="200" y1="20" x2="200" y2="380"/>
+      </svg>
+
+      <div class="inner">
+        <div class="num">✦ CH.03 // LINK.TRANSMISSION ✦</div>
+        <h2>Bora trocar uma ideia?</h2>
+        <p>Aberto a estágio, projetos novos e colaborações. Me chama em qualquer uma dessas redes:</p>
+        <div class="contact-links">
+          <a class="btn primary" href="https://github.com/PrK071" target="_blank" rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.66.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>
+            github.com/PrK071
+          </a>
+          <a class="btn ghost" href="https://www.linkedin.com/in/luiz-gabriel-de-andrade-souza-0a1388302/" target="_blank" rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.24 8.25h4.52V23H.24V8.25zM8.34 8.25h4.33v2.01h.06c.6-1.14 2.07-2.34 4.27-2.34 4.57 0 5.41 3 5.41 6.91V23h-4.52v-7.09c0-1.69-.03-3.86-2.35-3.86-2.36 0-2.72 1.84-2.72 3.74V23H8.34V8.25z"/></svg>
+            linkedin.com/in/luiz-gabriel
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- Y2K FOOTER -->
 <footer>
   <div class="container footer-inner">
-    <span class="mono-chip">Luiz Gabriel</span>
-    <span class="mono-chip">© 2026 · <a href="https://github.com/PrK071" target="_blank" rel="noopener">PrK071</a></span>
+    <span class="mono-chip">
+      <span class="barcode" aria-hidden="true">
+        <span style="width:2px"></span><span style="width:1px"></span><span style="width:3px"></span>
+        <span style="width:1px"></span><span style="width:2px"></span><span style="width:4px"></span>
+        <span style="width:1px"></span><span style="width:2px"></span><span style="width:1px"></span>
+        <span style="width:3px"></span><span style="width:2px"></span>
+      </span>
+      LUIZ GABRIEL // Y2K CHROME EDITION
+    </span>
+    <span class="mono-chip">© 2026 · <a href="https://github.com/PrK071" target="_blank" rel="noopener">PrK071</a> · ALL SYSTEMS NOMINAL</span>
   </div>
 </footer>
 
@@ -347,26 +1422,12 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 
-/* =========================================================
-   Hero 3D: teclado mecânico visto de cima sobre o deskmat,
-   luz âmbar quente, legendas nas teclas e uma ilha central
-   iluminada. Teclas afundam sozinhas, como se digitassem.
-   ========================================================= */
-
-const PALETTE = {
-  fog: 0x05040a,
-  amber: 0xffb066,
-  cream: 0xe8d5b0,
-  caseEdge: 0x8a7859,
-  caseBody: 0x14131a,
-  mat: 0x08080c,
-  dust: 0xffc890
-};
-
-const U = 0.32;          // 1U = uma tecla
-const KEY_GAP = 0.07;
-const KEY_H = 0.13;
-const CASE_TOP = 0.22;
+/* =====================================================================
+   Y2K 3D LIQUID CHROME SCULPTURE SCENE (1999-2003 CYBER-FUTURISM)
+   - Mirror-polished Liquid Chrome Torus Knot with procedural studio env
+   - Dual orbital metallic rings + wireframe cyber-globe
+   - Floating 4-point chrome starbursts + glowing perspective horizon grid
+   ===================================================================== */
 
 const container = document.getElementById('bg3d');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -374,540 +1435,228 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.1;
-renderer.domElement.style.display = 'block';
+renderer.toneMappingExposure = 1.18;
 container.appendChild(renderer.domElement);
 
 const scene = new THREE.Scene();
-scene.fog = new THREE.FogExp2(PALETTE.fog, 0.02);
+scene.fog = new THREE.FogExp2(0x040712, 0.048);
 
-const camera = new THREE.PerspectiveCamera(26, 1, 0.1, 100);
-// top-down: com o up default (0,1,0) o roll fica indefinido e a imagem
-// tomba, então fixo o up no eixo Z
-camera.up.set(0, 0, -1);
-const CAM_Y = 13;
-// exatamente sobre o centro: qualquer deslocamento em Z faz a moldura
-// virar trapézio em vez de retângulo
-camera.position.set(0, CAM_Y, 0);
+const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
+camera.position.set(0, 0.3, 8.2);
 
-const stage = new THREE.Group();
-scene.add(stage);
+/* -------- Procedural Y2K Iridescent Chrome Studio Environment -------- */
+function createChromeEnvMap() {
+  const envCanvas = document.createElement('canvas');
+  envCanvas.width = 512;
+  envCanvas.height = 256;
+  const c = envCanvas.getContext('2d');
 
-/* ====================== layout do teclado ======================= */
-// t: dark | cream | accent | lit  (lit = ilha iluminada do centro)
-// l: legenda   i: ícone
-const K = (w, l, t, i) => ({ w, l: l || '', t: t || 'dark', i: i || '' });
-const SP = (w) => ({ w, spacer: true });
+  // Deep cyber sky gradient
+  const bg = c.createLinearGradient(0, 0, 0, 256);
+  bg.addColorStop(0.0, '#071438');
+  bg.addColorStop(0.28, '#1a4ea8');
+  bg.addColorStop(0.46, '#d9f4ff');
+  bg.addColorStop(0.50, '#ffffff');
+  bg.addColorStop(0.54, '#00c8ff');
+  bg.addColorStop(0.68, '#1b1d4e');
+  bg.addColorStop(0.84, '#6e46d6');
+  bg.addColorStop(1.0, '#050918');
+  c.fillStyle = bg;
+  c.fillRect(0, 0, 512, 256);
 
-const ROWS = [
-  [
-    K(1, 'esc', 'accent'), SP(0.5),
-    K(1, 'F1'), K(1, 'F2'), K(1, 'F3'), K(1, 'F4'), SP(0.25),
-    K(1, 'F5'), K(1, 'F6'), K(1, 'F7'), K(1, 'F8'), SP(0.25),
-    K(1, 'F9'), K(1, 'F10'), K(1, 'F11'), K(1, 'F12', 'cream'), SP(0.35),
-    K(1, '', 'dark', '🔊'), K(1, '', 'dark', '🎤'), K(1, '', 'accent')
-  ],
-  [
-    K(1, '~'), K(1, '1', 'cream', '🍙'), K(1, '2', 'cream', '🍡'), K(1, '3', 'cream', '🍜'),
-    K(1, '4'), K(1, '5'), K(1, '6'), K(1, '7'), K(1, '8'), K(1, '9'), K(1, '0'),
-    K(1, '-'), K(1, '='), K(2, 'backspace'), SP(0.35),
-    K(1, 'ins'), K(1, 'home', 'cream'), K(1, 'pgup')
-  ],
-  [
-    K(1.5, 'tab'), K(1, 'Q'), K(1, 'W'), K(1, 'E'), K(1, 'R'), K(1, 'T'), K(1, 'Y'),
-    K(1, 'U'), K(1, 'I'), K(1, 'O'), K(1, 'P'), K(1, '['), K(1, ']'), K(1.5, '\\'), SP(0.35),
-    K(1, 'del'), K(1, 'end'), K(1, 'pgdn')
-  ],
-  [
-    K(1.75, '', 'dark', '🐈'), K(1, 'A'), K(1, 'S'), K(2, 'ABOUT', 'cream'),
-    K(1, 'G'), K(1, 'H'), K(1, 'J'), K(1, 'K'), K(1, 'L'), K(1, ';'), K(1, "'"),
-    K(2.25, 'enter'), SP(0.35), K(1, '')
-  ],
-  [
-    K(2.25, '', 'dark', '🦴'), K(1, '', 'dark', '🍗'), K(2, 'ME', 'cream'),
-    K(1, 'B'), K(1, 'N'), K(1, 'M'), K(1, ','), K(1, '.'), K(1, '/'),
-    K(1.75, 'shift'), SP(0.35), K(1, '', 'dark', '▲')
-  ],
-  [
-    K(1.25, '', 'dark', '🐱'), K(1.25, '', 'dark', '🐟'), K(1.25, '', 'dark', '🍩'),
-    K(6.25, '', 'cream'), K(1.25, 'fn'), K(1.25, 'control', 'cream'), SP(0.35),
-    K(1, '', 'dark', '☕'), K(1, '', 'dark', '◧'), K(1, '', 'dark', '☕')
-  ]
-];
-
-// posiciona cada tecla em unidades U
-const keys = [];
-let maxRowWidth = 0;
-
-ROWS.forEach((row, r) => {
-  let x = 0;
-  row.forEach((cell) => {
-    if (cell.spacer) {
-      x += cell.w;
-      return;
-    }
-    keys.push({ ...cell, x: x + cell.w / 2, row: r });
-    x += cell.w;
+  // Crisp studio chrome softbox bands for authentic liquid-metal reflections
+  const bands = [
+    { x: 40, y: 24, w: 120, h: 32, col: 'rgba(255,255,255,0.95)' },
+    { x: 240, y: 18, w: 180, h: 24, col: 'rgba(160,248,255,0.9)' },
+    { x: 90, y: 145, w: 140, h: 20, col: 'rgba(0,240,255,0.75)' },
+    { x: 310, y: 158, w: 150, h: 26, col: 'rgba(204,255,0,0.45)' },
+    { x: 180, y: 92, w: 220, h: 14, col: 'rgba(255,255,255,0.85)' }
+  ];
+  bands.forEach((b) => {
+    c.fillStyle = b.col;
+    c.fillRect(b.x, b.y, b.w, b.h);
   });
-  maxRowWidth = Math.max(maxRowWidth, x);
-});
 
-const boardW = maxRowWidth;
-const boardH = ROWS.length;
-
-// ilha iluminada: retângulo no meio do board, como a arte da referência
-keys.forEach((key) => {
-  const inX = key.x > boardW * 0.42 && key.x < boardW * 0.55;
-  const inZ = key.row >= 1 && key.row <= 5;
-  if (inX && inZ && key.t === 'dark') key.t = 'lit';
-});
-
-/* ================= atlas de legendas (canvas) ==================== */
-// Uma célula por tecla. O keycap é um Box, então o topo consome a
-// célula inteira: legenda sai reta, sem distorção.
-const ATLAS_COLS = 12;
-const CELL = 256;
-const atlasRows = Math.ceil(keys.length / ATLAS_COLS);
-
-const atlasCanvas = document.createElement('canvas');
-atlasCanvas.width = ATLAS_COLS * CELL;
-atlasCanvas.height = atlasRows * CELL;
-const ctx = atlasCanvas.getContext('2d');
-
-// Segundo canvas com as legendas em branco sobre preto: entra como
-// emissiveMap, então a letra tem brilho próprio e não escurece quando
-// a luz da mesa cai naquela região do teclado.
-const glowCanvas = document.createElement('canvas');
-glowCanvas.width = atlasCanvas.width;
-glowCanvas.height = atlasCanvas.height;
-const gtx = glowCanvas.getContext('2d');
-gtx.fillStyle = '#000';
-gtx.fillRect(0, 0, glowCanvas.width, glowCanvas.height);
-
-const SKIN = {
-  dark: { top: '#3d3d47', bottom: '#2e2e37', ink: '#f4efe6' },
-  cream: { top: '#f6ecd8', bottom: '#e6d8ba', ink: '#332c23' },
-  accent: { top: '#e85f45', bottom: '#c74a33', ink: '#fff6f1' },
-  lit: { top: '#f4cd91', bottom: '#dda158', ink: '#402a12' }
-};
-
-// desenha o conteúdo da tecla (ícone ou legenda) num contexto qualquer
-function drawLabel(c, key, x, y, color) {
-  c.save();
-  c.translate(x, y);
-  // a tecla é esticada em X pela escala da instância; comprimo o
-  // conteúdo no mesmo fator para o texto sair sem deformação
-  c.scale(1 / key.w, 1);
-  c.fillStyle = color;
-
-  if (key.i) {
-    c.font = '112px "Segoe UI Emoji", "Apple Color Emoji", sans-serif';
-    c.textAlign = 'center';
-    c.textBaseline = 'middle';
-    c.fillText(key.i, (CELL * key.w) / 2, CELL * 0.52);
-  } else if (key.l) {
-    const wide = key.l.length > 2;
-    // F1..F12 formam uma fileira só: se o alinhamento variar com o numero
-    // de caracteres, F10/F11/F12 saem centralizados e menores que F1..F9
-    // e a fileira parece torta. Aqui a linha inteira usa o mesmo estilo.
-    const fRow = /^F\d{1,2}$/.test(key.l);
-    // peso 700: legenda fina não sobrevive à redução na tela
-    c.font = '700 ' + (fRow ? '68px' : wide ? '64px' : '86px') + ' "Inter", "Segoe UI", sans-serif';
-    if (!fRow && (key.w > 1.5 || wide)) {
-      c.textAlign = 'center';
-      c.textBaseline = 'middle';
-      c.fillText(key.l, (CELL * key.w) / 2, CELL * 0.5);
-    } else {
-      c.textAlign = 'left';
-      c.textBaseline = 'top';
-      c.fillText(key.l, 34, 32);
-    }
-  }
-  c.restore();
+  const tex = new THREE.CanvasTexture(envCanvas);
+  tex.mapping = THREE.EquirectangularReflectionMapping;
+  tex.colorSpace = THREE.SRGBColorSpace;
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  const env = pmrem.fromEquirectangular(tex).texture;
+  tex.dispose();
+  pmrem.dispose();
+  return env;
 }
 
-function drawCell(key, col, row) {
-  const x = col * CELL;
-  const y = row * CELL;
-  const skin = SKIN[key.t] || SKIN.dark;
+scene.environment = createChromeEnvMap();
 
-  const grad = ctx.createLinearGradient(x, y, x, y + CELL);
-  grad.addColorStop(0, skin.top);
-  grad.addColorStop(1, skin.bottom);
-  ctx.fillStyle = grad;
-  ctx.fillRect(x, y, CELL, CELL);
-
-  // borda superior clara + inferior escura: dá o volume do keycap
-  ctx.fillStyle = 'rgba(255,255,255,0.12)';
-  ctx.fillRect(x, y, CELL, 10);
-  ctx.fillStyle = 'rgba(0,0,0,0.22)';
-  ctx.fillRect(x, y + CELL - 12, CELL, 12);
-
-  // teclas da ilha: âmbar com silhuetas baixas e um ponto de luz,
-  // simulando a arte iluminada da referência
-  if (key.t === 'lit') {
-    const radial = ctx.createRadialGradient(x + CELL * 0.5, y + CELL * 0.45, 8, x + CELL * 0.5, y + CELL * 0.5, CELL * 0.8);
-    radial.addColorStop(0, '#fbe6bc');
-    radial.addColorStop(1, '#d99a4e');
-    ctx.fillStyle = radial;
-    ctx.fillRect(x, y, CELL, CELL);
-
-    ctx.fillStyle = 'rgba(86,52,18,0.5)';
-    ctx.fillRect(x + 16, y + CELL - 68, 60, 68);
-    ctx.fillRect(x + CELL - 88, y + CELL - 52, 68, 52);
-
-    ctx.fillStyle = 'rgba(255,244,214,0.9)';
-    ctx.beginPath();
-    ctx.arc(x + CELL * 0.5, y + CELL * 0.4, 12, 0, Math.PI * 2);
-    ctx.fill();
-
-    // a ilha brilha inteira
-    gtx.fillStyle = '#6d5a34';
-    gtx.fillRect(x, y, CELL, CELL);
-    return;
-  }
-
-  drawLabel(ctx, key, x, y, skin.ink);
-  // no mapa emissivo a legenda é branca: vira retroiluminação
-  drawLabel(gtx, key, x, y, key.t === 'cream' ? '#4a4033' : '#ffffff');
-}
-
-// Inset de 2px: sem isso o filtro puxa pixels da célula vizinha e a
-// legenda aparece com fantasma nas bordas.
-const INSET_U = 2 / atlasCanvas.width;
-const INSET_V = 2 / atlasCanvas.height;
-
-keys.forEach((key, i) => {
-  const col = i % ATLAS_COLS;
-  const row = Math.floor(i / ATLAS_COLS);
-  drawCell(key, col, row);
-  key.uvOffset = [col / ATLAS_COLS + INSET_U, 1 - (row + 1) / atlasRows + INSET_V];
-  key.uvScale = [1 / ATLAS_COLS - INSET_U * 2, 1 / atlasRows - INSET_V * 2];
+/* -------- Liquid Chrome Materials -------- */
+const liquidChromeMat = new THREE.MeshPhysicalMaterial({
+  color: 0xeaf4ff,
+  metalness: 1.0,
+  roughness: 0.06,
+  clearcoat: 1.0,
+  clearcoatRoughness: 0.05,
+  iridescence: 0.65,
+  iridescenceIOR: 1.35,
+  envMapIntensity: 1.85
 });
 
-const atlas = new THREE.CanvasTexture(atlasCanvas);
-atlas.colorSpace = THREE.SRGBColorSpace;
-// mipmap num atlas mistura células vizinhas e borra a legenda; sem
-// mipmap + anisotropia máxima o texto sai nítido
-atlas.generateMipmaps = false;
-atlas.minFilter = THREE.LinearFilter;
-atlas.magFilter = THREE.LinearFilter;
-atlas.anisotropy = renderer.capabilities.getMaxAnisotropy();
+const cyanChromeMat = new THREE.MeshPhysicalMaterial({
+  color: 0x62f3ff,
+  metalness: 0.96,
+  roughness: 0.1,
+  clearcoat: 1.0,
+  emissive: 0x004e85,
+  emissiveIntensity: 0.35,
+  envMapIntensity: 1.7
+});
 
-const glowAtlas = new THREE.CanvasTexture(glowCanvas);
-glowAtlas.colorSpace = THREE.SRGBColorSpace;
-glowAtlas.generateMipmaps = false;
-glowAtlas.minFilter = THREE.LinearFilter;
-glowAtlas.magFilter = THREE.LinearFilter;
-glowAtlas.anisotropy = atlas.anisotropy;
+const wireGlowMat = new THREE.MeshBasicMaterial({
+  color: 0x00f0ff,
+  wireframe: true,
+  transparent: true,
+  opacity: 0.18
+});
 
-/* ========================= os keycaps =========================== */
-// Box: o topo recebe a célula inteira do atlas. Duas instâncias
-// separadas porque a ilha acesa precisa de emissive próprio.
-const plainKeys = keys.filter((k) => k.t !== 'lit');
-const litKeys = keys.filter((k) => k.t === 'lit');
+/* -------- Central Y2K Sculpture Cluster -------- */
+const rig = new THREE.Group();
+scene.add(rig);
 
-function buildCaps(group, emissive) {
-  const geometry = new THREE.BoxGeometry(1, 1, 1);
-  const offsets = new Float32Array(group.length * 2);
-  const scales = new Float32Array(group.length * 2);
+// 1. Mirror Liquid Chrome Torus Knot (signature Y2K chrome blob/knot)
+const knotGeo = new THREE.TorusKnotGeometry(1.18, 0.34, 220, 42, 2, 3);
+const knotMesh = new THREE.Mesh(knotGeo, liquidChromeMat);
+rig.add(knotMesh);
 
-  group.forEach((key, i) => {
-    offsets[i * 2] = key.uvOffset[0];
-    offsets[i * 2 + 1] = key.uvOffset[1];
-    scales[i * 2] = key.uvScale[0];
-    scales[i * 2 + 1] = key.uvScale[1];
+// 2. Wireframe Cyber-Globe encompassing core
+const globeMesh = new THREE.Mesh(new THREE.SphereGeometry(2.12, 24, 16), wireGlowMat);
+rig.add(globeMesh);
+
+// 3. Dual Tilted Chrome Orbital Rings (iconic 2000s futuristic emblem)
+const ring1 = new THREE.Mesh(new THREE.TorusGeometry(2.48, 0.048, 24, 140), liquidChromeMat);
+ring1.rotation.set(1.18, 0.35, 0.25);
+rig.add(ring1);
+
+const ring2 = new THREE.Mesh(new THREE.TorusGeometry(2.85, 0.026, 20, 140), cyanChromeMat);
+ring2.rotation.set(-0.92, 0.55, -0.4);
+rig.add(ring2);
+
+// Small orbiting chrome beads on ring1
+const orbitBeads = new THREE.Group();
+orbitBeads.rotation.copy(ring1.rotation);
+for (let i = 0; i < 4; i++) {
+  const angle = (i / 4) * Math.PI * 2;
+  const bead = new THREE.Mesh(new THREE.SphereGeometry(0.11, 20, 20), i % 2 === 0 ? cyanChromeMat : liquidChromeMat);
+  bead.position.set(Math.cos(angle) * 2.48, Math.sin(angle) * 2.48, 0);
+  orbitBeads.add(bead);
+}
+rig.add(orbitBeads);
+
+// 4. Floating 3D Y2K 4-Point Chrome Starbursts
+function createY2KStar(scale) {
+  const shape = new THREE.Shape();
+  const outer = 1.0;
+  const inner = 0.2;
+  for (let i = 0; i < 8; i++) {
+    const r = i % 2 === 0 ? outer : inner;
+    const a = (i / 8) * Math.PI * 2;
+    const x = Math.cos(a) * r;
+    const y = Math.sin(a) * r;
+    if (i === 0) shape.moveTo(x, y);
+    else shape.lineTo(x, y);
+  }
+  shape.closePath();
+  const geo = new THREE.ExtrudeGeometry(shape, {
+    depth: 0.14,
+    bevelEnabled: true,
+    bevelThickness: 0.08,
+    bevelSize: 0.06,
+    bevelSegments: 3
   });
-
-  geometry.setAttribute('aUvOffset', new THREE.InstancedBufferAttribute(offsets, 2));
-  geometry.setAttribute('aUvScale', new THREE.InstancedBufferAttribute(scales, 2));
-
-  const material = new THREE.MeshStandardMaterial({
-    map: atlas,
-    emissiveMap: glowAtlas,
-    emissive: new THREE.Color(emissive ? PALETTE.amber : 0xfff2dc),
-    emissiveIntensity: emissive ? 0.9 : 0.95,
-    roughness: 0.6,
-    metalness: 0.04
-  });
-
-  // desloca o UV por instância para cada tecla ler a própria célula
-  material.onBeforeCompile = (shader) => {
-    shader.vertexShader = shader.vertexShader
-      .replace(
-        '#include <common>',
-        '#include <common>\nattribute vec2 aUvOffset;\nattribute vec2 aUvScale;'
-      )
-      .replace(
-        '#include <uv_vertex>',
-        '#include <uv_vertex>\n' +
-          '#ifdef USE_MAP\n\tvMapUv = aUvOffset + vMapUv * aUvScale;\n#endif\n' +
-          '#ifdef USE_EMISSIVEMAP\n\tvEmissiveMapUv = aUvOffset + vEmissiveMapUv * aUvScale;\n#endif'
-      );
-  };
-
-  const mesh = new THREE.InstancedMesh(geometry, material, group.length);
-  mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+  geo.center();
+  const mesh = new THREE.Mesh(geo, liquidChromeMat);
+  mesh.scale.setScalar(scale);
   return mesh;
 }
 
-const caps = buildCaps(plainKeys, false);
-const capsLit = buildCaps(litKeys, true);
-stage.add(caps);
-stage.add(capsLit);
+const stars = [];
+const starSpecs = [
+  { pos: [-2.7, 1.85, -0.6], scale: 0.38, speed: 0.7 },
+  { pos: [2.9, -1.65, 0.4], scale: 0.30, speed: -0.9 },
+  { pos: [2.4, 2.05, -1.1], scale: 0.22, speed: 1.1 },
+  { pos: [-2.2, -1.9, -0.8], scale: 0.20, speed: -0.6 }
+];
+starSpecs.forEach((s, idx) => {
+  const st = createY2KStar(s.scale);
+  st.position.set(...s.pos);
+  st.userData = { baseY: s.pos[1], speed: s.speed, phase: idx * 1.4 };
+  rig.add(st);
+  stars.push(st);
+});
 
-const dummy = new THREE.Object3D();
-const originY = CASE_TOP + KEY_H / 2;
-const capW = U * (1 - KEY_GAP);
+/* -------- Y2K Perspective Cyber Horizon Grid -------- */
+const gridPlane = new THREE.GridHelper(44, 44, 0x00f0ff, 0x1a3878);
+gridPlane.position.set(0, -3.1, -6);
+gridPlane.material.transparent = true;
+gridPlane.material.opacity = 0.24;
+scene.add(gridPlane);
 
-function placeKey(key) {
-  dummy.position.set(key.px, originY - key.drop, key.pz);
-  dummy.scale.set(key.w * capW, KEY_H, capW);
-  dummy.updateMatrix();
-  key.mesh.setMatrixAt(key.idx, dummy.matrix);
+/* -------- Digital Starfield / Floating Cyber Dust -------- */
+const COUNT = 260;
+const pGeo = new THREE.BufferGeometry();
+const pPos = new Float32Array(COUNT * 3);
+for (let i = 0; i < COUNT; i++) {
+  pPos[i * 3] = (Math.random() - 0.5) * 18;
+  pPos[i * 3 + 1] = (Math.random() - 0.5) * 11;
+  pPos[i * 3 + 2] = (Math.random() - 0.5) * 10 - 2;
 }
-
-[[plainKeys, caps], [litKeys, capsLit]].forEach(([group, mesh]) => {
-  group.forEach((key, i) => {
-    key.px = (key.x - boardW / 2) * U;
-    key.pz = (key.row - (boardH - 1) / 2) * U;
-    key.mesh = mesh;
-    key.idx = i;
-    key.drop = 0;
-    key.press = 0;
-    key.nextPress = 1 + Math.random() * 12;
-    placeKey(key);
-  });
-});
-
-/* =========================== o case ============================= */
-// moldura clara aparecendo como linha fina em volta do corpo escuro
-const caseGroup = new THREE.Group();
-stage.add(caseGroup);
-
-const caseEdge = new THREE.Mesh(
-  new THREE.BoxGeometry((boardW + 0.55) * U, 0.2, (boardH + 0.55) * U),
-  new THREE.MeshStandardMaterial({ color: PALETTE.caseEdge, roughness: 0.5, metalness: 0.35 })
-);
-caseEdge.position.y = 0.1;
-caseGroup.add(caseEdge);
-
-const caseBody = new THREE.Mesh(
-  new THREE.BoxGeometry((boardW + 0.3) * U, 0.22, (boardH + 0.3) * U),
-  new THREE.MeshStandardMaterial({ color: PALETTE.caseBody, roughness: 0.75, metalness: 0.2 })
-);
-caseBody.position.y = 0.112;
-caseGroup.add(caseBody);
-
-const BOARD_HALF_X = (boardW * U) / 2;
-const BOARD_HALF_Z = (boardH * U) / 2;
-
-/* ========================== deskmat ============================= */
-// Plano grande (cobre a viewport inteira, sem faixa preta nas bordas).
-// A moldura é desenhada em unidades de mundo e recalculada no resize,
-// então fica sempre esquadrada com a tela.
-const matMaterial = new THREE.ShaderMaterial({
+pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+const pMat = new THREE.PointsMaterial({
+  color: 0x9cecff,
+  size: 0.045,
   transparent: true,
-  uniforms: {
-    uMat: { value: new THREE.Color(PALETTE.mat) },
-    uLine: { value: new THREE.Color(PALETTE.caseEdge) },
-    uGlow: { value: new THREE.Color(PALETTE.amber) },
-    uIntensity: { value: 1.0 },
-    uFrameHalf: { value: new THREE.Vector2(4.1, 2.5) },
-    uMatHalf: { value: new THREE.Vector2(4.5, 2.9) }
-  },
-  vertexShader: `
-    varying vec2 vLocal;
-    void main() {
-      vLocal = position.xy;
-      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-    }
-  `,
-  fragmentShader: `
-    uniform vec3 uMat;
-    uniform vec3 uLine;
-    uniform vec3 uGlow;
-    uniform float uIntensity;
-    uniform vec2 uFrameHalf;
-    uniform vec2 uMatHalf;
-    varying vec2 vLocal;
-
-    // 1 dentro do retângulo, 0 fora, com transição de 'soft'
-    float box(vec2 p, vec2 half_, float soft) {
-      vec2 d = abs(p) - half_;
-      return 1.0 - smoothstep(-soft, soft, max(d.x, d.y));
-    }
-
-    void main() {
-      // o mat: retângulo maior, levemente acima do preto do fundo
-      float body = box(vLocal, uMatHalf, 0.12);
-
-      // linha fina da moldura, espessura constante em unidades de mundo
-      float line = clamp(box(vLocal, uFrameHalf, 0.006) - box(vLocal, uFrameHalf - 0.016, 0.006), 0.0, 1.0);
-
-      // brilho quente onde a lâmpada cai
-      float d = length(vLocal * vec2(0.42, 0.62));
-      float glow = exp(-d * 2.4) * 0.12 * uIntensity;
-
-      vec3 color = uMat * body + uLine * line * 0.55 + uGlow * glow;
-      float alpha = clamp(body * 0.96 + line * 0.55 + glow, 0.0, 1.0);
-      gl_FragColor = vec4(color, alpha);
-    }
-  `
+  opacity: 0.65,
+  blending: THREE.AdditiveBlending
 });
-const deskmat = new THREE.Mesh(new THREE.PlaneGeometry(40, 26), matMaterial);
-deskmat.rotation.x = -Math.PI / 2;
-stage.add(deskmat);
+const particles = new THREE.Points(pGeo, pMat);
+scene.add(particles);
 
-/* ===================== objetos sobre a mesa ===================== */
-// Alinhados em duas faixas: props acima do teclado, tudo simétrico.
-const propMaterial = new THREE.MeshStandardMaterial({
-  color: 0x17161c,
-  roughness: 0.7,
-  metalness: 0.15
-});
-const trimMaterial = new THREE.MeshStandardMaterial({
-  color: PALETTE.cream,
-  roughness: 0.5,
-  metalness: 0.2
-});
+/* -------- Studio Lights -------- */
+scene.add(new THREE.AmbientLight(0x88b4ff, 0.7));
+const keyLight = new THREE.DirectionalLight(0xffffff, 2.2);
+keyLight.position.set(5, 6, 6);
+scene.add(keyLight);
 
-const PROP_Z = -BOARD_HALF_Z - 0.62;
+const cyanRim = new THREE.PointLight(0x00f0ff, 12, 22, 1.6);
+cyanRim.position.set(-4, 2, 4);
+scene.add(cyanRim);
 
-const card = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.06, 0.32), propMaterial);
-card.position.set(0, 0.03, PROP_Z);
-stage.add(card);
+const violetRim = new THREE.PointLight(0x9d7bff, 10, 22, 1.6);
+violetRim.position.set(4, -3, 3);
+scene.add(violetRim);
 
-const cardTrim = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.02, 0.08), trimMaterial);
-cardTrim.position.set(0, 0.075, PROP_Z + 0.1);
-stage.add(cardTrim);
-
-[-1.62, -1.3].forEach((x) => {
-  const knob = new THREE.Mesh(new THREE.SphereGeometry(0.15, 18, 12), propMaterial);
-  knob.scale.set(1, 0.7, 1);
-  knob.position.set(x, 0.095, PROP_Z);
-  stage.add(knob);
-});
-
-const mouse = new THREE.Mesh(new THREE.SphereGeometry(0.23, 20, 14), propMaterial);
-mouse.scale.set(0.7, 0.42, 1.1);
-mouse.position.set(1.62, 0.1, PROP_Z);
-stage.add(mouse);
-
-/* ============================ luzes ============================= */
-scene.add(new THREE.AmbientLight(PALETTE.amber, 0.85));
-
-// lâmpada alta e ampla: as legendas precisam ser legíveis de ponta a
-// ponta do teclado, não só no centro
-const deskLamp = new THREE.PointLight(PALETTE.amber, 14, 30, 1.6);
-deskLamp.position.set(0, 4.2, 0.2);
-stage.add(deskLamp);
-
-// rasante: destaca o relevo das teclas
-const grazing = new THREE.PointLight(PALETTE.cream, 3.0, 14, 1.8);
-grazing.position.set(-1.3, 1.0, 1.5);
-stage.add(grazing);
-
-// fria e fraca, para não ficar tudo laranja
-const cool = new THREE.DirectionalLight(0x8fa8dd, 0.35);
-cool.position.set(-4, 6, -5);
-scene.add(cool);
-
-/* =========================== poeira ============================= */
-const DUST = 240;
-const dustGeometry = new THREE.BufferGeometry();
-const dustPos = new Float32Array(DUST * 3);
-const dustSpeed = new Float32Array(DUST);
-const dustPhase = new Float32Array(DUST);
-const dustSize = new Float32Array(DUST);
-
-for (let i = 0; i < DUST; i++) {
-  dustPos[i * 3] = (Math.random() - 0.5) * 8;
-  dustPos[i * 3 + 1] = Math.random() * 3.4;
-  dustPos[i * 3 + 2] = (Math.random() - 0.5) * 5;
-  dustSpeed[i] = 0.04 + Math.random() * 0.12;
-  dustPhase[i] = Math.random() * Math.PI * 2;
-  dustSize[i] = 1.4 + Math.random() * 3.0;
-}
-
-dustGeometry.setAttribute('position', new THREE.Float32BufferAttribute(dustPos, 3));
-dustGeometry.setAttribute('aSpeed', new THREE.Float32BufferAttribute(dustSpeed, 1));
-dustGeometry.setAttribute('aPhase', new THREE.Float32BufferAttribute(dustPhase, 1));
-dustGeometry.setAttribute('aSize', new THREE.Float32BufferAttribute(dustSize, 1));
-
-const dustMaterial = new THREE.ShaderMaterial({
-  transparent: true,
-  depthWrite: false,
-  blending: THREE.AdditiveBlending,
-  uniforms: {
-    uTime: { value: 0 },
-    uColor: { value: new THREE.Color(PALETTE.dust) },
-    uPixelRatio: { value: renderer.getPixelRatio() },
-    uSpan: { value: 3.6 }
-  },
-  vertexShader: `
-    attribute float aSpeed;
-    attribute float aPhase;
-    attribute float aSize;
-    uniform float uTime;
-    uniform float uPixelRatio;
-    uniform float uSpan;
-    varying float vAlpha;
-    void main() {
-      vec3 p = position;
-      p.y = mod(p.y + uTime * aSpeed, uSpan);
-      p.x += sin(uTime * 0.3 + aPhase) * 0.25;
-      p.z += cos(uTime * 0.22 + aPhase) * 0.2;
-      vec4 viewPos = modelViewMatrix * vec4(p, 1.0);
-      gl_Position = projectionMatrix * viewPos;
-      gl_PointSize = aSize * uPixelRatio * (5.0 / -viewPos.z);
-      vAlpha = smoothstep(0.0, 0.7, p.y) * (1.0 - smoothstep(uSpan * 0.5, uSpan, p.y));
-    }
-  `,
-  fragmentShader: `
-    uniform vec3 uColor;
-    varying float vAlpha;
-    void main() {
-      vec2 d = gl_PointCoord - 0.5;
-      float r = length(d);
-      if (r > 0.5) discard;
-      float core = smoothstep(0.5, 0.0, r);
-      gl_FragColor = vec4(uColor, core * core * vAlpha * 0.4);
-    }
-  `
-});
-stage.add(new THREE.Points(dustGeometry, dustMaterial));
-
-/* ============================ post ============================== */
+/* -------- Postprocessing Bloom -------- */
 const composer = new EffectComposer(renderer);
 composer.addPass(new RenderPass(scene, camera));
-const bloom = new UnrealBloomPass(new THREE.Vector2(1, 1), 0.22, 0.45, 0.88);
+const bloom = new UnrealBloomPass(new THREE.Vector2(1, 1), 0.34, 0.5, 0.78);
 composer.addPass(bloom);
 composer.addPass(new OutputPass());
-
-/* =========================== layout ============================= */
-const lookAt = new THREE.Vector3(0, 0, 0);
 
 function layout() {
   const w = window.innerWidth;
   const h = window.innerHeight;
-  const narrow = w < 900;
+  const narrow = w < 960;
 
   camera.aspect = w / h;
-  camera.fov = narrow ? 36 : 26;
+  camera.fov = narrow ? 50 : 42;
   camera.updateProjectionMatrix();
 
-  // meia-altura/largura visíveis no plano da mesa: a moldura acompanha
-  // a tela, mantendo margem igual em volta
-  const halfH = Math.tan((camera.fov * Math.PI) / 360) * CAM_Y;
-  const halfW = halfH * camera.aspect;
-  matMaterial.uniforms.uFrameHalf.value.set(halfW * 0.8, halfH * 0.78);
-  matMaterial.uniforms.uMatHalf.value.set(halfW * 1.02, halfH * 1.02);
+  // Offset sculpture right on desktop so the hero typography on the left stays super crisp
+  rig.position.set(narrow ? 0 : 2.65, narrow ? 0.25 : 0.05, narrow ? -1.4 : 0);
+  rig.scale.setScalar(narrow ? 0.78 : 0.92);
 
   renderer.setSize(w, h);
   composer.setSize(w, h);
   bloom.setSize(w, h);
-  dustMaterial.uniforms.uPixelRatio.value = renderer.getPixelRatio();
 }
 window.addEventListener('resize', layout);
 layout();
@@ -919,50 +1668,37 @@ window.addEventListener('mousemove', (e) => {
 });
 
 const clock = new THREE.Clock();
-let last = 0;
 
 function animate() {
   requestAnimationFrame(animate);
   const t = reduceMotion ? 0 : clock.getElapsedTime();
-  const dt = Math.min(t - last, 0.05);
-  last = t;
 
-  // não gasta GPU quando o hero saiu de vista
-  const o = Math.max(0, Math.min(1, 1 - (window.scrollY || 0) / 500));
-  container.style.opacity = o;
-  if (o === 0) return;
+  // Fade gently as user scrolls down so 3D stays subtle behind cards
+  const scrollRatio = Math.min(1, (window.scrollY || 0) / 900);
+  container.style.opacity = String(Math.max(0.24, 1 - scrollRatio * 0.76));
 
-  // parallax mínimo: a mesa fica esquadrada com a tela
-  camera.position.x += (mouseX * 0.1 - camera.position.x) * 0.04;
-  camera.position.z += (mouseY * 0.1 - camera.position.z) * 0.04;
-  camera.lookAt(lookAt);
+  knotMesh.rotation.x = t * 0.28 + mouseY * 0.35;
+  knotMesh.rotation.y = t * 0.42 + mouseX * 0.45;
+  globeMesh.rotation.y = -t * 0.14;
+  globeMesh.rotation.x = Math.sin(t * 0.2) * 0.12;
+  ring1.rotation.z = t * 0.26;
+  orbitBeads.rotation.z = t * 0.26;
+  ring2.rotation.z = -t * 0.19;
+  ring2.rotation.x = -0.92 + Math.sin(t * 0.3) * 0.08;
 
-  // teclas afundando em ordem aleatória, como se alguém digitasse
-  let dirtyPlain = false;
-  let dirtyLit = false;
-  keys.forEach((key) => {
-    key.nextPress -= dt;
-    if (key.nextPress <= 0 && key.press === 0) {
-      key.press = 1;
-      key.nextPress = 3 + Math.random() * 14;
-    }
-    if (key.press > 0) {
-      key.press = Math.max(0, key.press - dt * 3.2);
-      key.drop = Math.sin(key.press * Math.PI) * 0.07;
-      placeKey(key);
-      if (key.t === 'lit') dirtyLit = true;
-      else dirtyPlain = true;
-    }
+  stars.forEach((st) => {
+    st.rotation.y = t * st.userData.speed;
+    st.rotation.z = Math.sin(t * 0.8 + st.userData.phase) * 0.25;
+    st.position.y = st.userData.baseY + Math.sin(t * 1.1 + st.userData.phase) * 0.14;
   });
-  if (dirtyPlain) caps.instanceMatrix.needsUpdate = true;
-  if (dirtyLit) capsLit.instanceMatrix.needsUpdate = true;
 
-  // respiração da lâmpada
-  const pulse = 1 + Math.sin(t * 0.7) * 0.05;
-  deskLamp.intensity = 14 * pulse;
-  matMaterial.uniforms.uIntensity.value = pulse;
+  // Smooth gliding perspective horizon
+  gridPlane.position.z = -6 + ((t * 0.65) % 1.0);
+  particles.rotation.y = t * 0.03;
 
-  dustMaterial.uniforms.uTime.value = t;
+  camera.position.x += (mouseX * 0.32 - camera.position.x) * 0.04;
+  camera.position.y += (0.3 - mouseY * 0.22 - camera.position.y) * 0.04;
+  camera.lookAt(0, 0, 0);
 
   composer.render();
 }
@@ -970,8 +1706,7 @@ animate();
 </script>
 
 <script>
-
-
+// Typing effect (preserving Luiz's exact phrases)
 (function () {
   var words = [
     'desenvolvedor python',
@@ -989,19 +1724,359 @@ animate();
       ci++;
       el.textContent = word.slice(0, ci);
       if (ci === word.length) { deleting = true; setTimeout(tick, 1900); return; }
-      setTimeout(tick, 65);
+      setTimeout(tick, 62);
     } else {
       ci--;
       el.textContent = word.slice(0, ci);
-      if (ci === 0) { deleting = false; wi = (wi + 1) % words.length; setTimeout(tick, 350); return; }
+      if (ci === 0) { deleting = false; wi = (wi + 1) % words.length; setTimeout(tick, 340); return; }
       setTimeout(tick, 32);
     }
   }
   tick();
 })();
 
+// Live Y2K HUD Clock in top bar
+(function () {
+  var clockEl = document.getElementById('y2k-clock');
+  if (!clockEl) return;
+  function updateClock() {
+    var now = new Date();
+    var hh = String(now.getHours()).padStart(2, '0');
+    var mm = String(now.getMinutes()).padStart(2, '0');
+    var ss = String(now.getSeconds()).padStart(2, '0');
+    clockEl.textContent = 'ONLINE // ' + hh + ':' + mm + ':' + ss;
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
+})();
+
+// Auto-Sync GitHub Projects Engine (Live API -> repos.json Action Snapshot -> Local Fallback)
+(function () {
+  var CONFIG = {
+    username: 'PrK071',
+    ignoredRepos: ['PrK071', 'PrK071.github.io'],
+    hideForks: true,
+    initialVisible: 6,
+    cacheKey: 'prk071_repos_cache_v1',
+    cacheTtlMs: 5 * 60 * 1000
+  };
+
+  // Custom rich metadata for spotlight projects (still receives live stars/demo/date from GitHub!)
+  var FEATURED_META = {
+    JARVIS: {
+      featured: true,
+      order: 1,
+      ext: 'AI',
+      color: '#00f0ff',
+      sub: 'assistente de IA local',
+      desc: 'Assistente Windows que roda Qwen3.5-4B na GPU local: voz em pt-BR (STT faster-whisper + TTS Piper/Microsoft Daniel), pesquisa web com fontes citadas, Codex integrado e interface HUD web + desktop. Projeto feito em dupla.',
+      tags: ['Python', 'Qwen3.5', 'Whisper STT', 'Piper TTS', 'Interface Web'],
+      icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="9" stroke-dasharray="4 3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>'
+    },
+    Kari: {
+      featured: true,
+      order: 2,
+      ext: 'APP',
+      color: '#9d7bff',
+      sub: 'leitor de mangás fullstack',
+      desc: 'Catálogo e leitor de mangás/manhwas/HQs/web novels com FastAPI + React. Agrega 8+ fontes, plugins de importação (CBZ, EPUB, PDF), OAuth2 (Google, Discord, AniList, MAL) e scraping avançado com Playwright/CDP para sites protegidos.',
+      tags: ['FastAPI', 'React', 'Playwright', 'OAuth2', 'Scraping'],
+      icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="9" y1="7" x2="16" y2="7"/><line x1="9" y1="11" x2="14" y2="11"/></svg>'
+    },
+    Ichthus: {
+      featured: true,
+      order: 3,
+      ext: 'WAV',
+      color: '#ccff00',
+      sub: 'reconhecedor de músicas',
+      desc: 'Shazam open source gratuito: app desktop em Python (ShazamIO) e extensão de navegador que identifica músicas 100% no browser usando WebAssembly — sem precisar do app rodando.',
+      tags: ['Python', 'ShazamIO', 'WebAssembly', 'Extensão Chrome', 'GUI Desktop'],
+      icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h3l2.5-6 4 12 3-8 2.5 4H22"/></svg>'
+    }
+  };
+
+  var FALLBACK_REPOS = [
+    { name: 'JARVIS', html_url: 'https://github.com/PrK071/JARVIS', homepage: null, language: 'Python', stargazers_count: 1, fork: false, topics: [], pushed_at: '2026-10-15T20:58:35Z', description: null },
+    { name: 'Kari', html_url: 'https://github.com/PrK071/Kari', homepage: 'https://kari-phi.vercel.app', language: 'Python', stargazers_count: 0, fork: false, topics: [], pushed_at: '2026-09-09T07:43:18Z', description: null },
+    { name: 'Ichthus', html_url: 'https://github.com/PrK071/Ichthus', homepage: null, language: 'Python', stargazers_count: 0, fork: false, topics: [], pushed_at: '2026-06-11T03:13:28Z', description: null }
+  ];
+
+  var LANG_STYLES = {
+    Python:     { ext: 'PY',  color: '#00f0ff', icon: '<svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>' },
+    JavaScript: { ext: 'JS',  color: '#ccff00', icon: '<svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>' },
+    TypeScript: { ext: 'TS',  color: '#38bdf8', icon: '<svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 9h8M12 9v8"/></svg>' },
+    'C#':       { ext: 'CS',  color: '#9d7bff', icon: '<svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/></svg>' },
+    HTML:       { ext: 'WEB', color: '#ff73d0', icon: '<svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="9" ry="3.8"/><line x1="12" y1="3" x2="12" y2="21"/></svg>' }
+  };
+
+  var DEFAULT_STYLE = {
+    ext: 'GIT',
+    color: '#9cecff',
+    icon: '<svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>'
+  };
+
+  var grid = document.getElementById('projects-grid');
+  var countLabel = document.getElementById('repo-count-label');
+  var sourceLabel = document.getElementById('sync-source-label');
+  var moreWrap = document.getElementById('projects-more-wrap');
+  var moreBtn = document.getElementById('toggle-more-btn');
+  var syncBtn = document.getElementById('force-sync-btn');
+  var syncBtnText = document.getElementById('sync-btn-text');
+
+  var allRepos = [];
+  var activeFilter = 'all';
+  var expanded = false;
+
+  function esc(str) {
+    return String(str || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function formatDate(iso) {
+    if (!iso) return '2026';
+    var d = new Date(iso);
+    if (isNaN(d.getTime())) return '2026';
+    var months = ['JAN','FEV','MAR','ABR','MAI','JUN','JUL','AGO','SET','OUT','NOV','DEZ'];
+    return months[d.getMonth()] + ' ' + d.getFullYear();
+  }
+
+  function safeUrl(url) {
+    if (!url) return null;
+    var trimmed = String(url).trim();
+    if (!trimmed) return null;
+    if (/^https?:\/\//i.test(trimmed)) return trimmed;
+    return 'https://' + trimmed;
+  }
+
+  function normalizeRepos(rawList) {
+    var ignored = {};
+    CONFIG.ignoredRepos.forEach(function (n) { ignored[n.toLowerCase()] = true; });
+
+    var cleaned = (rawList || []).filter(function (r) {
+      if (!r || !r.name) return false;
+      if (ignored[r.name.toLowerCase()]) return false;
+      if (CONFIG.hideForks && r.fork) return false;
+      return true;
+    }).map(function (r) {
+      var meta = FEATURED_META[r.name] || null;
+      var style = meta || LANG_STYLES[r.language] || DEFAULT_STYLE;
+      var demo = safeUrl(r.homepage);
+      var topics = Array.isArray(r.topics) ? r.topics : [];
+      var isFeatured = !!(meta && meta.featured) || topics.indexOf('featured') !== -1 || topics.indexOf('portfolio') !== -1;
+
+      var tags = meta && meta.tags ? meta.tags.slice() : [];
+      if (!tags.length) {
+        if (r.language) tags.push(r.language);
+        topics.slice(0, 4).forEach(function (t) { tags.push(t); });
+        if (demo) tags.push('Live Demo');
+        if (!tags.length) tags.push('Open Source');
+      }
+
+      var desc = (meta && meta.desc) || r.description || (
+        'Repositório público' + (r.language ? ' em ' + r.language : '') + ' no GitHub. Acesse o código-fonte e atualizações diretamente no repositório.'
+      );
+
+      var sub = (meta && meta.sub) || (r.language ? ('repositório ' + r.language) : 'projeto open source');
+
+      return {
+        name: r.name,
+        url: r.html_url || ('https://github.com/' + CONFIG.username + '/' + r.name),
+        demo: demo,
+        language: r.language || null,
+        stars: r.stargazers_count || 0,
+        pushedAt: r.pushed_at || r.updated_at || '',
+        featured: isFeatured,
+        order: meta ? meta.order : 99,
+        ext: style.ext || 'GIT',
+        color: style.color || '#00f0ff',
+        icon: style.icon || DEFAULT_STYLE.icon,
+        sub: sub,
+        desc: desc,
+        tags: tags
+      };
+    });
+
+    // Sort: featured spotlight first, then most recently pushed on GitHub
+    cleaned.sort(function (a, b) {
+      if (a.order !== b.order) return a.order - b.order;
+      if (a.featured !== b.featured) return a.featured ? -1 : 1;
+      return (b.pushedAt || '').localeCompare(a.pushedAt || '');
+    });
+
+    return cleaned;
+  }
+
+  function renderProjects() {
+    var filtered = allRepos.filter(function (r) {
+      if (activeFilter === 'featured') return r.featured;
+      if (activeFilter === 'demo') return !!r.demo;
+      return true;
+    });
+
+    var visibleList = expanded ? filtered : filtered.slice(0, CONFIG.initialVisible);
+
+    if (filtered.length > CONFIG.initialVisible) {
+      moreWrap.style.display = 'flex';
+      moreBtn.textContent = expanded
+        ? 'Mostrar menos'
+        : ('Ver todos (' + filtered.length + ' repositórios)');
+    } else {
+      moreWrap.style.display = 'none';
+    }
+
+    grid.innerHTML = visibleList.map(function (repo, idx) {
+      var modNum = String(idx + 1).padStart(2, '0');
+      var codeName = repo.name.toUpperCase().replace(/[^A-Z0-9_-]/g, '').slice(0, 14) + '.' + repo.ext;
+      var tagsHtml = repo.tags.slice(0, 5).map(function (t, ti) {
+        var cls = ti < 2 ? 'tag' : ti < 4 ? 'tag v' : 'tag g';
+        return '<span class="' + cls + '">' + esc(t) + '</span>';
+      }).join('');
+
+      var demoBtn = repo.demo
+        ? '<a class="demo-btn" href="' + esc(repo.demo) + '" target="_blank" rel="noopener" aria-label="Abrir demo de ' + esc(repo.name) + '">DEMO ↗</a>'
+        : '';
+
+      var starsText = repo.stars > 0 ? ('<span class="star-pill">★ ' + repo.stars + '</span>') : '<span>OPEN SOURCE</span>';
+
+      return (
+        '<article class="project">' +
+          '<div class="card-chrome-bar">' +
+            '<span class="bar-id">MOD_' + modNum + ' // ' + esc(codeName) + '</span>' +
+            '<span class="win-dots"><i></i><i></i><i></i></span>' +
+          '</div>' +
+          '<div class="project-body">' +
+            '<div class="project-top">' +
+              '<div class="project-emblem" style="color:' + esc(repo.color) + ';" aria-hidden="true">' + repo.icon + '</div>' +
+              '<div class="project-links">' +
+                demoBtn +
+                '<a href="' + esc(repo.url) + '" target="_blank" rel="noopener" aria-label="' + esc(repo.name) + ' no GitHub">REPO ↗</a>' +
+              '</div>' +
+            '</div>' +
+            '<h3>' + esc(repo.name) + ' <span class="sub">' + esc(repo.sub) + '</span></h3>' +
+            '<div class="repo-meta-strip">' +
+              starsText +
+              '<span>UPD // ' + esc(formatDate(repo.pushedAt)) + '</span>' +
+            '</div>' +
+            '<p>' + esc(repo.desc) + '</p>' +
+            '<div class="tags">' + tagsHtml + '</div>' +
+          '</div>' +
+        '</article>'
+      );
+    }).join('');
+
+    // Re-bind holographic cursor sheen on rendered cards
+    grid.querySelectorAll('.project').forEach(function (card) {
+      card.addEventListener('mousemove', function (e) {
+        var rect = card.getBoundingClientRect();
+        card.style.setProperty('--mx', (e.clientX - rect.left) + 'px');
+        card.style.setProperty('--my', (e.clientY - rect.top) + 'px');
+      });
+    });
+  }
+
+  async function fetchLiveGitHub() {
+    var url = 'https://api.github.com/users/' + CONFIG.username + '/repos?sort=pushed&direction=desc&per_page=100';
+    var res = await fetch(url, { headers: { Accept: 'application/vnd.github+json' } });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    var data = await res.json();
+    if (!Array.isArray(data)) throw new Error('Invalid response');
+    return data;
+  }
+
+  async function fetchSnapshotJson() {
+    var res = await fetch('./repos.json', { cache: 'no-cache' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    var payload = await res.json();
+    return Array.isArray(payload.repos) ? payload.repos : [];
+  }
+
+  async function syncRepos(forceRefresh) {
+    if (syncBtn) {
+      syncBtn.classList.add('loading');
+      syncBtnText.textContent = 'SYNCING...';
+    }
+
+    try {
+      var raw = null;
+      var source = 'LIVE API';
+
+      if (!forceRefresh) {
+        try {
+          var cached = JSON.parse(sessionStorage.getItem(CONFIG.cacheKey) || 'null');
+          if (cached && cached.ts && (Date.now() - cached.ts) < CONFIG.cacheTtlMs && Array.isArray(cached.repos)) {
+            raw = cached.repos;
+            source = 'LIVE CACHE';
+          }
+        } catch (_) {}
+      }
+
+      if (!raw) {
+        try {
+          raw = await fetchLiveGitHub();
+          source = 'LIVE GITHUB API';
+          try { sessionStorage.setItem(CONFIG.cacheKey, JSON.stringify({ ts: Date.now(), repos: raw })); } catch (_) {}
+        } catch (_) {
+          try {
+            raw = await fetchSnapshotJson();
+            source = 'AUTO SNAPSHOT';
+          } catch (__) {
+            raw = FALLBACK_REPOS;
+            source = 'LOCAL FALLBACK';
+          }
+        }
+      }
+
+      allRepos = normalizeRepos(raw);
+      countLabel.textContent = allRepos.length + ' MODULES SYNCED';
+      sourceLabel.textContent = source;
+      renderProjects();
+    } finally {
+      if (syncBtn) {
+        syncBtn.classList.remove('loading');
+        syncBtnText.textContent = 'GITHUB LIVE SYNC';
+      }
+    }
+  }
+
+  document.querySelectorAll('.filter-pill').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.filter-pill').forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      activeFilter = btn.getAttribute('data-filter') || 'all';
+      expanded = false;
+      renderProjects();
+    });
+  });
+
+  if (moreBtn) {
+    moreBtn.addEventListener('click', function () {
+      expanded = !expanded;
+      renderProjects();
+    });
+  }
+
+  if (syncBtn) {
+    syncBtn.addEventListener('click', function () { syncRepos(true); });
+  }
+
+  syncRepos(false);
+})();
+
+// Scroll reveal (also triggers immediately on deep-links like #projetos)
 (function () {
   var els = document.querySelectorAll('.reveal');
+  function revealVisible() {
+    var vh = window.innerHeight || 900;
+    els.forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      if (r.top < vh * 1.05 && r.bottom > -40) {
+        el.classList.add('visible');
+      }
+    });
+  }
   if (!('IntersectionObserver' in window)) {
     els.forEach(function (e) { e.classList.add('visible'); });
     return;
@@ -1013,8 +2088,13 @@ animate();
         io.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.12 });
+  }, { threshold: 0.08 });
   els.forEach(function (e) { io.observe(e); });
+  revealVisible();
+  setTimeout(revealVisible, 350);
+  setTimeout(revealVisible, 900);
+  window.addEventListener('hashchange', function () { setTimeout(revealVisible, 120); setTimeout(revealVisible, 650); });
+  window.addEventListener('scroll', revealVisible, { passive: true });
 })();
 </script>
 </body>

@@ -1,0 +1,72 @@
+name: Sync GitHub Repositories
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/sync-repos.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Fetch public repositories for PrK071
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          node -e '
+            (async () => {
+              const res = await fetch("https://api.github.com/users/PrK071/repos?sort=pushed&direction=desc&per_page=100", {
+                headers: {
+                  "Accept": "application/vnd.github+json",
+                  "User-Agent": "PrK071-Portfolio-Sync",
+                  ...(process.env.GH_TOKEN ? { "Authorization": `Bearer ${process.env.GH_TOKEN}` } : {})
+                }
+              });
+              if (!res.ok) throw new Error(`GitHub API HTTP ${res.status}`);
+              const raw = await res.json();
+              const clean = raw
+                .filter(r => !r.private && !r.archived)
+                .map(r => ({
+                  name: r.name,
+                  description: r.description,
+                  html_url: r.html_url,
+                  homepage: r.homepage || null,
+                  language: r.language || null,
+                  stargazers_count: r.stargazers_count || 0,
+                  forks_count: r.forks_count || 0,
+                  fork: !!r.fork,
+                  topics: Array.isArray(r.topics) ? r.topics : [],
+                  pushed_at: r.pushed_at,
+                  updated_at: r.updated_at
+                }));
+              const fs = require("fs");
+              fs.writeFileSync("repos.json", JSON.stringify({
+                generated_at: new Date().toISOString(),
+                username: "PrK071",
+                repos: clean
+              }, null, 2) + "\n");
+              console.log(`Synced ${clean.length} repositories to repos.json`);
+            })().catch(err => { console.error(err); process.exit(1); });
+          '
+
+      - name: Commit and push if repos.json changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet repos.json; then
+            echo "No changes in repos.json"
+          else
+            git add repos.json
+            git commit -m "chore: auto-sync GitHub repositories"
+            git push
+          fi
