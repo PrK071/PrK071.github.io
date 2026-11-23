@@ -126,6 +126,10 @@ body {
   gap: 10px;
   text-decoration: none;
   color: var(--chrome-hi);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
 }
 
 .nav-orb {
@@ -156,21 +160,22 @@ body {
   gap: 6px;
 }
 
-.nav-links a {
+.nav-links button {
   font-family: 'Orbitron', sans-serif;
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  text-decoration: none;
   color: var(--muted);
+  background: transparent;
   padding: 7px 14px;
   border-radius: 999px;
   border: 1px solid transparent;
+  cursor: pointer;
   transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.nav-links a:hover {
+.nav-links button:hover {
   color: #ffffff;
   border-color: rgba(0, 240, 255, 0.55);
   background: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, rgba(0,240,255,0.14) 55%, rgba(46,123,255,0.22) 100%);
@@ -362,6 +367,7 @@ body {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   text-decoration: none;
+  cursor: pointer;
   transition: transform 0.16s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
@@ -800,7 +806,7 @@ section {
   gap: 8px;
 }
 
-.project-links a {
+.project-links button {
   display: inline-flex;
   align-items: center;
   gap: 5px;
@@ -810,21 +816,21 @@ section {
   font-size: 0.62rem;
   font-weight: 700;
   letter-spacing: 0.08em;
-  text-decoration: none;
   color: var(--chrome-hi);
   border: 1px solid rgba(182, 208, 255, 0.34);
   background: linear-gradient(180deg, rgba(255,255,255,0.16) 0%, rgba(12, 24, 58, 0.8) 100%);
+  cursor: pointer;
   transition: all 0.2s ease;
 }
 
-.project-links a.demo-btn {
+.project-links button.demo-btn {
   color: #031026;
   border-color: #ccfaff;
   background: var(--aqua-grad);
   box-shadow: 0 0 14px rgba(0, 240, 255, 0.35);
 }
 
-.project-links a:hover {
+.project-links button:hover {
   border-color: var(--cyan);
   color: #041026;
   background: var(--aqua-grad);
@@ -1081,13 +1087,43 @@ footer {
   gap: 10px;
 }
 
-.mono-chip a {
+.mono-chip .link-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  font: inherit;
   color: var(--cyan);
-  text-decoration: none;
   font-weight: 700;
+  cursor: pointer;
 }
 
-.mono-chip a:hover { text-decoration: underline; }
+.mono-chip .link-btn:hover { text-decoration: underline; }
+
+.y2k-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 90;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #031026;
+  background: var(--aqua-grad);
+  border: 1px solid #ccfaff;
+  box-shadow: 0 10px 30px rgba(0, 240, 255, 0.45);
+  opacity: 0;
+  transform: translateY(14px);
+  pointer-events: none;
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+
+.y2k-toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
 
 .barcode {
   display: inline-flex;
@@ -1124,7 +1160,7 @@ footer {
 }
 
 @media (max-width: 620px) {
-  .nav-links a { padding: 6px 9px; font-size: 0.62rem; }
+  .nav-links button { padding: 6px 9px; font-size: 0.62rem; }
   .hero { padding-top: 104px; }
   .contact-box { padding: 44px 20px; }
 }
@@ -1138,16 +1174,16 @@ footer {
 <!-- Y2K Floating Metallic Chrome HUD Navbar -->
 <div class="y2k-nav-wrap">
   <nav class="y2k-nav" aria-label="Navegação principal">
-    <a class="nav-brand" href="#">
+    <button class="nav-brand" type="button" data-scroll="top" aria-label="Voltar ao topo">
       <span class="nav-orb" aria-hidden="true">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="#ffffff"><path d="M12 1l2.8 8.2L23 12l-8.2 2.8L12 23l-2.8-8.2L1 12l8.2-2.8z"/></svg>
       </span>
       <span class="nav-id">PRK-071</span>
-    </a>
+    </button>
     <div class="nav-links">
-      <a href="#sobre">01. Sobre</a>
-      <a href="#projetos">02. Projetos</a>
-      <a href="#contato">03. Contato</a>
+      <button type="button" data-scroll="#sobre">01. Sobre</button>
+      <button type="button" data-scroll="#projetos">02. Projetos</button>
+      <button type="button" data-scroll="#contato">03. Contato</button>
     </div>
     <div class="nav-status">
       <span class="status-dot"></span>
@@ -1181,18 +1217,18 @@ footer {
     </p>
 
     <div class="cta-row">
-      <a class="btn primary" href="#projetos">
+      <button class="btn primary" type="button" data-scroll="#projetos">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M5 9l7-7 7 7M5 22h14"/></svg>
         Ver projetos
-      </a>
-      <a class="btn ghost" href="https://github.com/PrK071" target="_blank" rel="noopener">
+      </button>
+      <button class="btn ghost" type="button" data-url="https://github.com/PrK071">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.66.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>
         GitHub
-      </a>
-      <a class="btn ghost" href="https://www.linkedin.com/in/luiz-gabriel-de-andrade-souza-0a1388302/" target="_blank" rel="noopener">
+      </button>
+      <button class="btn ghost" type="button" data-url="https://www.linkedin.com/in/luiz-gabriel-de-andrade-souza-0a1388302/">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.24 8.25h4.52V23H.24V8.25zM8.34 8.25h4.33v2.01h.06c.6-1.14 2.07-2.34 4.27-2.34 4.57 0 5.41 3 5.41 6.91V23h-4.52v-7.09c0-1.69-.03-3.86-2.35-3.86-2.36 0-2.72 1.84-2.72 3.74V23H8.34V8.25z"/></svg>
         LinkedIn
-      </a>
+      </button>
     </div>
   </div>
 
@@ -1345,7 +1381,7 @@ footer {
         <button class="filter-pill" data-filter="featured" type="button">Destaques</button>
         <button class="filter-pill" data-filter="demo" type="button">Com Demo ao Vivo</button>
       </div>
-      <button class="sync-btn" id="force-sync-btn" type="button" title="Buscar repositórios mais recentes direto da API do GitHub">
+      <button class="sync-btn" id="force-sync-btn" type="button" aria-label="Atualizar repositórios do GitHub">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><polyline points="21 3 21 9 15 9"/></svg>
         <span id="sync-btn-text">GITHUB LIVE SYNC</span>
       </button>
@@ -1377,14 +1413,18 @@ footer {
         <h2>Bora trocar uma ideia?</h2>
         <p>Aberto a estágio, projetos novos e colaborações. Me chama em qualquer uma dessas redes:</p>
         <div class="contact-links">
-          <a class="btn primary" href="https://github.com/PrK071" target="_blank" rel="noopener">
+          <button class="btn primary" type="button" data-url="https://github.com/PrK071">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.66.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>
             github.com/PrK071
-          </a>
-          <a class="btn ghost" href="https://www.linkedin.com/in/luiz-gabriel-de-andrade-souza-0a1388302/" target="_blank" rel="noopener">
+          </button>
+          <button class="btn ghost" type="button" data-url="https://www.linkedin.com/in/luiz-gabriel-de-andrade-souza-0a1388302/">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.24 8.25h4.52V23H.24V8.25zM8.34 8.25h4.33v2.01h.06c.6-1.14 2.07-2.34 4.27-2.34 4.57 0 5.41 3 5.41 6.91V23h-4.52v-7.09c0-1.69-.03-3.86-2.35-3.86-2.36 0-2.72 1.84-2.72 3.74V23H8.34V8.25z"/></svg>
             linkedin.com/in/luiz-gabriel
-          </a>
+          </button>
+          <button class="btn ghost" type="button" data-email="lg1286547@gmail.com">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+            lg1286547@gmail.com
+          </button>
         </div>
       </div>
     </div>
@@ -1403,9 +1443,10 @@ footer {
       </span>
       LUIZ GABRIEL // Y2K CHROME EDITION
     </span>
-    <span class="mono-chip">© 2026 · <a href="https://github.com/PrK071" target="_blank" rel="noopener">PrK071</a> · ALL SYSTEMS NOMINAL</span>
+    <span class="mono-chip">© 2026 · <button class="link-btn" type="button" data-url="https://github.com/PrK071">PrK071</button> · ALL SYSTEMS NOMINAL</span>
   </div>
 </footer>
+<div class="y2k-toast" id="y2k-toast" role="status" aria-live="polite"></div>
 
 <script type="importmap">
 {
@@ -1936,7 +1977,7 @@ animate();
       }).join('');
 
       var demoBtn = repo.demo
-        ? '<a class="demo-btn" href="' + esc(repo.demo) + '" target="_blank" rel="noopener" aria-label="Abrir demo de ' + esc(repo.name) + '">DEMO ↗</a>'
+        ? '<button class="demo-btn" type="button" data-url="' + esc(repo.demo) + '" aria-label="Abrir demo de ' + esc(repo.name) + '">DEMO ↗</button>'
         : '';
 
       var starsText = repo.stars > 0 ? ('<span class="star-pill">★ ' + repo.stars + '</span>') : '<span>OPEN SOURCE</span>';
@@ -1952,7 +1993,7 @@ animate();
               '<div class="project-emblem" style="color:' + esc(repo.color) + ';" aria-hidden="true">' + repo.icon + '</div>' +
               '<div class="project-links">' +
                 demoBtn +
-                '<a href="' + esc(repo.url) + '" target="_blank" rel="noopener" aria-label="' + esc(repo.name) + ' no GitHub">REPO ↗</a>' +
+                '<button type="button" data-url="' + esc(repo.url) + '" aria-label="' + esc(repo.name) + ' no GitHub">REPO ↗</button>' +
               '</div>' +
             '</div>' +
             '<h3>' + esc(repo.name) + ' <span class="sub">' + esc(repo.sub) + '</span></h3>' +
@@ -2063,6 +2104,56 @@ animate();
   }
 
   syncRepos(false);
+})();
+
+// Clean JS navigation without browser bottom-left URL hover preview
+(function () {
+  var toastEl = document.getElementById('y2k-toast');
+  var toastTimer = null;
+
+  function showToast(msg) {
+    if (!toastEl) return;
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () {
+      toastEl.classList.remove('show');
+    }, 2600);
+  }
+
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-url], [data-scroll], [data-email]');
+    if (!btn) return;
+
+    var url = btn.getAttribute('data-url');
+    if (url) {
+      window.open(url, '_blank', 'noopener,noreferrer');
+      return;
+    }
+
+    var target = btn.getAttribute('data-scroll');
+    if (target) {
+      if (target === 'top') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        var el = document.querySelector(target);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }
+      return;
+    }
+
+    var email = btn.getAttribute('data-email');
+    if (email) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(email).then(function () {
+          showToast('✦ EMAIL COPIADO: ' + email.toUpperCase());
+        }).catch(function () {});
+      } else {
+        showToast('✦ ' + email.toUpperCase());
+      }
+      window.location.href = 'mailto:' + email;
+    }
+  });
 })();
 
 // Scroll reveal (also triggers immediately on deep-links like #projetos)
